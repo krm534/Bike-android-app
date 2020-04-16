@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Bike</string>
+    <string name="title_text">BIKE?</string>
+    <string name="no_preferences_text">No preferences have been selected</string>
+    <string name="title_text2">Preferences</string>
+    <string name="preferred_temperature_text">Preferred Temperature (Degree)</string>
+    <string name="preferred_wind_speed_text">Preferred Wind Speed (MPH)</string>
+    <string name="preferred_humidity_text">Preferred Humidity (%)</string>
+    <string name="preferred_conditions_text">Preferred Conditions</string>
+    <string name="preferred_location_text">Preferred Location</string>
+    <string name="save_text">Save</string>
+    <string name="rangebar_error_text">Min and max cannot be the same value</string>
+    <string name="condition_error_text">One condition must be checked</string>
+</resources>

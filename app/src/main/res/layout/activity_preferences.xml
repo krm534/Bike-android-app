@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PreferencesActivity">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp"
+    tools:context=".PreferencesActivity">
+
+    <TextView
+        android:id="@+id/title_textview2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:fontFamily="@font/chewy"
+        android:text="@string/title_text2"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="363dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_textview2" >
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/preferred_temperature_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/preferred_temperature_text"
+                android:textSize="18sp" />
+
+            <com.appyvet.materialrangebar.RangeBar
+                android:id="@+id/SearchrangeSeekbarTemperature"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                app:mrb_tickEnd="100"
+                app:mrb_tickInterval="1"
+                app:mrb_tickStart="1" />
+
+            <TextView
+                android:id="@+id/preferred_temperature_error_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/rangebar_error_text"
+                android:textColor="#F60B0B"
+                android:textSize="14sp"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/preferred_wind_speed_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/preferred_wind_speed_text"
+                android:textSize="18sp" />
+
+            <com.appyvet.materialrangebar.RangeBar
+                android:id="@+id/SearchrangeSeekbarWindSpeed"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                app:mrb_tickEnd="30"
+                app:mrb_tickInterval="1"
+                app:mrb_tickStart="1" />
+
+            <TextView
+                android:id="@+id/preferred_wind_speed_error_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/rangebar_error_text"
+                android:textColor="#F60B0B"
+                android:textSize="14sp"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/preferred_humidity_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/preferred_humidity_text"
+                android:textSize="18sp" />
+
+            <com.appyvet.materialrangebar.RangeBar
+                android:id="@+id/SearchrangeSeekbarHumidity"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                app:mrb_tickEnd="100"
+                app:mrb_tickInterval="1"
+                app:mrb_tickStart="1" />
+
+            <TextView
+                android:id="@+id/preferred_humidity_error_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/rangebar_error_text"
+                android:textColor="#F60B0B"
+                android:textSize="14sp"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/preferred_conditions_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/preferred_conditions_text"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/checkbox_snow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="Snow" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_rain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="Rain" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_clear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Clear" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/checkbox_clouds"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="Clouds" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_drizzle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="Drizzle" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/preferred_conditions_error_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/condition_error_text"
+                android:textColor="#F60B0B"
+                android:textSize="14sp"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/preferred_location_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/preferred_location_text"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/zip_code_edittext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Enter Zip Code"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:autofillHints="" />
+
+            <TextView
+                android:id="@+id/preferred_zipcode_error_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Length must be between 1-9 | Empty input"
+                android:textColor="#F60B0B"
+                android:textSize="14sp"
+                android:visibility="gone"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:text="@string/save_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
