@@ -16,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,12 +26,12 @@ public class WeatherRepository {
     private String API_key;
     private int zipCode;
     private ArrayList<Weather> arrayOfWeather = new ArrayList<>();
-    final int DAYS = 7;
+    private final int DAYS = 7;
 
     public WeatherRepository(Activity activity) {
         zipCode = new Pref(activity).getZipCode();
         days = 7;
-        API_key= // ENTER API KEY AS STRING;
+        API_key= "e9eb0a43c8fdbe3ac1d4df98bbe7ab5e";
         url += "zip=" + zipCode + ",us&appid=" + API_key + "&cnt=" + days;
     }
 
@@ -62,16 +63,17 @@ public class WeatherRepository {
                 String body;
                 if(error.networkResponse.data != null) {
                     try {
-                        body = new String(error.networkResponse.data,"UTF-8");
+                        body = new String(error.networkResponse.data, StandardCharsets.UTF_8);
                         JSONObject jsonObject = new JSONObject(body);
                         if (jsonObject.getString("message").equals("city not found")) {
                             callback2.processFinished();
                         }
                         else {
                             // Network Error Occurred
+                            System.out.println("ERROR: " + error.networkResponse.data);
                             callback3.processFinished(error.networkResponse);
                         }
-                    } catch (UnsupportedEncodingException | JSONException e) {
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
@@ -89,7 +91,7 @@ public class WeatherRepository {
     }
 
     // Get weather if no internet connection but weather data is stored in SharedPreferences
-    public static ArrayList<Weather> GetWeather(JSONArray jsonArray)  {
+    public ArrayList<Weather> GetWeather(JSONArray jsonArray)  {
         ArrayList<Weather> arrayOfWeather = new ArrayList<>();
         try {
             for (int i = 0; i < jsonArray.length() - 1; i++) {
