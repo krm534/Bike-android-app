@@ -25,7 +25,7 @@ public class WeatherRepository {
     public WeatherRepository(Activity activity) {
         int zipCode = new Pref(activity).getZipCode();
         int days = 7;
-        String API_key = "e9eb0a43c8fdbe3ac1d4df98bbe7ab5e";
+        String API_key = "";
         url += "zip=" + zipCode + ",us&appid=" + API_key + "&cnt=" + days;
     }
 
