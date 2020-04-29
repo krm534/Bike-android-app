@@ -11,4 +11,20 @@
     <string name="save_text">Save</string>
     <string name="rangebar_error_text">Min and max cannot be the same value</string>
     <string name="condition_error_text">One condition must be checked</string>
+    <string name="settings_imagebutton_contentdescription">Preferences button</string>
+    <string name="display_imageview_contentdescription">Weather type image view</string>
+    <string name="prevButton_contentdescription">Previous day\'s weather button</string>
+    <string name="nextButton_contentDescription">Next day\'s weather button</string>
+    <string name="snow">Snow</string>
+    <string name="rain">Rain</string>
+    <string name="clear">Clear</string>
+    <string name="clouds">Clouds</string>
+    <string name="drizzle">Drizzle</string>
+    <string name="enter_zip_code">Enter Zip Code</string>
+    <string name="zipcode_error_text">Length must be between 1–9 | Empty input</string>
+    <string name="invalid_zipcode">Invalid zip code entered</string>
+    <string name="no_preferences_selected">No preferences have been selected</string>
+    <string name="invalid_zipcode_and_no_network">Invalid zip code entered | No network</string>
+    <string name="no_preferences_and_no_network">No preferences have been selected | No network</string>
+    <string name="network_error">Network Error</string>
 </resources>

@@ -12,10 +12,10 @@ import com.example.bike.R;
 import com.example.bike.Util.Pref;
 
 public class NetworkHandler {
-    private Context context;
-    private Pref pref;
+    private final Context context;
+    private final Pref pref;
     private TextView noPreferences;
-    private WeatherHandler weatherHandler;
+    private final WeatherHandler weatherHandler;
 
     public NetworkHandler(Context context, Pref pref, WeatherHandler weatherHandler) {
         this.context = context;
@@ -55,10 +55,10 @@ public class NetworkHandler {
             weatherHandler.getData();
         }
         else if (pref.getCheckedZipCode()) {
-            noPreferences.setText("Invalid zip code entered");
+            noPreferences.setText(R.string.invalid_zipcode);
         }
         else {
-            noPreferences.setText("No preferences have been selected");
+            noPreferences.setText(R.string.no_preferences_selected);
         }
     }
 
@@ -80,16 +80,16 @@ public class NetworkHandler {
     // Run this code if not connected to network and no preferences are stored
     private void PrefIsEmpty() {
         if (pref.getCheckedZipCode()) {
-            noPreferences.setText("Invalid zip code entered | No network");
+            noPreferences.setText(R.string.invalid_zipcode_and_no_network);
         }
         else if (!pref.getClear() && !pref.getClouds() && !pref.getDrizzle() && !pref.getRain() && !pref.getSnow() &&
                 pref.getZipCode() == 0 && pref.getMaxHumidity() == 0 && pref.getMinHumidity() == 0 &&
                 pref.getMaxWindSpeed() == 0 && pref.getMinWindSpeed() == 0 && pref.getMaxTemperature() == 0 &&
                 pref.getMinTemperature() == 0) {
-            noPreferences.setText("No preferences have been selected | No network");
+            noPreferences.setText(R.string.no_preferences_and_no_network);
         }
         else {
-            noPreferences.setText("Network Error");
+            noPreferences.setText(R.string.network_error);
         }
     }
 

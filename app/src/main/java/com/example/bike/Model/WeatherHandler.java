@@ -25,18 +25,18 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class WeatherHandler {
-    private Activity activity;
-    private Comparison comparison;
-    private Pref pref;
-    private TextView date;
+    private final Activity activity;
+    private final Comparison comparison;
+    private final Pref pref;
+    private final TextView date;
     private ArrayList<Weather> weatherList;
     private Weather weather;
     private int unixDate;
     private int index = 0;
-    private WeatherRepository weatherRepository;
-    private LinearLayoutCompat linearLayoutCompat;
-    private CardView cardView;
-    private TextView noPreferences;
+    private final WeatherRepository weatherRepository;
+    private final LinearLayoutCompat linearLayoutCompat;
+    private final CardView cardView;
+    private final TextView noPreferences;
 
     public WeatherHandler(Activity activity, Comparison comparison, Pref pref, WeatherRepository weatherRepository) {
         this.activity = activity;
@@ -73,7 +73,7 @@ public class WeatherHandler {
         getDate();
 
         // Change UI elements
-        noPreferences.setText("No preferences have been selected");
+        noPreferences.setText(R.string.no_preferences_selected);
         noPreferences.setVisibility(View.GONE);
         cardView.setVisibility(View.VISIBLE);
         linearLayoutCompat.setVisibility(View.VISIBLE);
@@ -137,20 +137,20 @@ public class WeatherHandler {
         ImageView displayImage = activity.findViewById(R.id.display_imageview);
 
         if (score == 1) {
-            scoreMessage.setText("Bad day to bike in " + location);
+            scoreMessage.setText(String.format("Bad day to bike in %s", location));
             displayImage.setImageResource(R.drawable.bad);
 
         }
         else if (score == 2) {
-            scoreMessage.setText("Mediocre day to bike in " + location);
+            scoreMessage.setText(String.format("Mediocre day to bike in %s", location));
             displayImage.setImageResource(R.drawable.mediocre);
         }
         else if (score == 3) {
-            scoreMessage.setText("Good day to bike in " + location);
+            scoreMessage.setText(String.format("Good day to bike in %s", location));
             displayImage.setImageResource(R.drawable.good);
         }
         else {
-            scoreMessage.setText("Great day to bike in " + location);
+            scoreMessage.setText(String.format("Great day to bike in %s", location));
             displayImage.setImageResource(R.drawable.great);
         }
     }
@@ -163,7 +163,7 @@ public class WeatherHandler {
         Date date = new java.util.Date(unixDate*1000L);
 
         // the format of your date
-        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy z");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy z", java.util.Locale.getDefault());
 
         // give a timezone reference for formatting (see comment at the bottom)
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -223,13 +223,13 @@ public class WeatherHandler {
         cardView.setVisibility(View.GONE);
         linearLayoutCompat.setVisibility(View.GONE);
         date.setVisibility(View.GONE);
-        noPreferences.setText("Invalid zip code entered");
+        noPreferences.setText(R.string.invalid_zipcode);
         noPreferences.setVisibility(View.VISIBLE);
     }
 
     // Handle network error during API call
     private void handleInvalidNetworkResponse(NetworkResponse networkResponse) {
-        noPreferences.setText("Network Error: " + networkResponse);
+        noPreferences.setText(String.format("Network Error: %s", networkResponse));
     }
 
     // --------------------------------------------------------------------------------------------------

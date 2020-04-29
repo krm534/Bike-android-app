@@ -15,12 +15,7 @@ import com.example.bike.Model.WeatherHandler;
 import com.example.bike.Util.Pref;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    private ImageButton settings, nextButton, previousButton;
-    private Comparison comparison;
     private WeatherHandler weatherHandler;
-    private WeatherRepository weatherRepository;
-    private Pref pref;
-    private NetworkHandler networkHandler;
     private final int LAUNCH_FIRST_ACTIVITY = 1;
 
     @Override
@@ -29,16 +24,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         // Instantiate Classes
-        pref = new Pref(this);
-        comparison = new Comparison();
-        weatherRepository = new WeatherRepository(this);
+        Pref pref = new Pref(this);
+        Comparison comparison = new Comparison();
+        WeatherRepository weatherRepository = new WeatherRepository(this);
         weatherHandler = new WeatherHandler(this, comparison, pref, weatherRepository);
-        networkHandler = new NetworkHandler(this, pref, weatherHandler);
+        NetworkHandler networkHandler = new NetworkHandler(this, pref, weatherHandler);
 
         // Find UI Views
-        settings = findViewById(R.id.settings_imagebutton);
-        nextButton = findViewById(R.id.nextButton);
-        previousButton = findViewById(R.id.prevButton);
+        ImageButton settings = findViewById(R.id.settings_imagebutton);
+        ImageButton nextButton = findViewById(R.id.nextButton);
+        ImageButton previousButton = findViewById(R.id.prevButton);
 
         // Set Button listeners
         settings.setOnClickListener(this);
@@ -75,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     // Redirect to PreferencesActivity class
-    protected void redirectToNewActivity() {
+    private void redirectToNewActivity() {
         Intent intent = new Intent(MainActivity.this, PreferencesActivity.class);
         startActivityForResult(intent, LAUNCH_FIRST_ACTIVITY);
     }

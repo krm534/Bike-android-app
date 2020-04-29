@@ -5,7 +5,6 @@ import android.app.Activity;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.bike.Controller.AppController;
 import com.example.bike.Model.Weather;
@@ -15,28 +14,23 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.List;
 
 public class WeatherRepository {
     private String url = "https://api.openweathermap.org/data/2.5/forecast/daily?";
-    private int days;
-    private String API_key;
-    private int zipCode;
-    private ArrayList<Weather> arrayOfWeather = new ArrayList<>();
+    private final ArrayList<Weather> arrayOfWeather = new ArrayList<>();
     private final int DAYS = 7;
 
     public WeatherRepository(Activity activity) {
-        zipCode = new Pref(activity).getZipCode();
-        days = 7;
-        API_key= "e9eb0a43c8fdbe3ac1d4df98bbe7ab5e";
+        int zipCode = new Pref(activity).getZipCode();
+        int days = 7;
+        String API_key = "e9eb0a43c8fdbe3ac1d4df98bbe7ab5e";
         url += "zip=" + zipCode + ",us&appid=" + API_key + "&cnt=" + days;
     }
 
     // Get weather if connected to internet
-    public List getWeather(final WeatherRepositoryAsyncResponse callBack, final InvalidArrayResponse callback2, final NetworkErrorResponse callback3) {
+    public void getWeather(final WeatherRepositoryAsyncResponse callBack, final InvalidArrayResponse callback2, final NetworkErrorResponse callback3) {
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -70,7 +64,7 @@ public class WeatherRepository {
                         }
                         else {
                             // Network Error Occurred
-                            System.out.println("ERROR: " + error.networkResponse.data);
+                            System.out.printf("ERROR: %s%n", error.networkResponse.data);
                             callback3.processFinished(error.networkResponse);
                         }
                     } catch (JSONException e) {
@@ -86,8 +80,6 @@ public class WeatherRepository {
 
         // Add request to Volley queue
         AppController.getInstance().addToRequestQueue(jsonObjectRequest);
-
-        return arrayOfWeather;
     }
 
     // Get weather if no internet connection but weather data is stored in SharedPreferences

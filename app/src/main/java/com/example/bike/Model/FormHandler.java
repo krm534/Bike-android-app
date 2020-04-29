@@ -1,7 +1,6 @@
 package com.example.bike.Model;
 
 import android.app.Activity;
-import android.util.Range;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -11,15 +10,26 @@ import com.appyvet.materialrangebar.RangeBar;
 import com.example.bike.R;
 import com.example.bike.Util.Pref;
 
+import java.util.Locale;
+
 public class FormHandler implements RangeBar.OnRangeBarChangeListener {
-    private RangeBar humidityRangebar, temperatureRangebar, windSpeedRangebar;
-    private TextView tempError, windSpeedError, humidityError, conditionsError, zipCodeError;
-    private CheckBox snowCheckBox, rainCheckBox, clearCheckBox, cloudsCheckBox, drizzleCheckBox;
+    private final RangeBar humidityRangebar;
+    private final RangeBar temperatureRangebar;
+    private final RangeBar windSpeedRangebar;
+    private final TextView tempError;
+    private final TextView windSpeedError;
+    private final TextView humidityError;
+    private final TextView conditionsError;
+    private final TextView zipCodeError;
+    private final CheckBox snowCheckBox;
+    private final CheckBox rainCheckBox;
+    private final CheckBox clearCheckBox;
+    private final CheckBox cloudsCheckBox;
+    private final CheckBox drizzleCheckBox;
     private int maxTemp, minTemp, maxHumidity, minHumidity, maxWindSpeed, minWindSpeed;
-    private boolean checkTempRangeBarInput, checkWindSpeedRangeBarInput, checkHumidityRangeBarInput, checkCheckBoxesInput, checkZipCodeInput;
-    private Pref pref;
-    private Activity activity;
-    private EditText zipCodeEditText;
+    private final Pref pref;
+    private final Activity activity;
+    private final EditText zipCodeEditText;
 
     public FormHandler(Pref pref, Activity activity) {
         this.pref = pref;
@@ -98,7 +108,7 @@ public class FormHandler implements RangeBar.OnRangeBarChangeListener {
         }
 
         // Zip code
-        zipCodeEditText.setText(Integer.toString(pref.getZipCode()));
+        zipCodeEditText.setText(String.format(Locale.getDefault(), "%d", pref.getZipCode()));
 
         // Max and Min temperature
         temperatureRangebar.setRangePinsByValue(pref.getMinTemperature(), pref.getMaxTemperature());
@@ -129,6 +139,7 @@ public class FormHandler implements RangeBar.OnRangeBarChangeListener {
     // Validate form input
     public void checkFormInput() {
         // Check Temperature Rangebar Input
+        boolean checkTempRangeBarInput;
         if (minTemp == maxTemp || minTemp < 1 || minTemp > 100 || maxTemp < 1 || maxTemp > 100) {
             checkTempRangeBarInput = false;
             tempError.setVisibility(View.VISIBLE);
@@ -139,6 +150,7 @@ public class FormHandler implements RangeBar.OnRangeBarChangeListener {
         }
 
         // Check Wind Speed Rangebar Input
+        boolean checkWindSpeedRangeBarInput;
         if (minWindSpeed == maxWindSpeed || minWindSpeed < 1 || minWindSpeed > 30 || maxWindSpeed < 1 || maxWindSpeed > 30) {
             checkWindSpeedRangeBarInput = false;
             windSpeedError.setVisibility(View.VISIBLE);
@@ -149,6 +161,7 @@ public class FormHandler implements RangeBar.OnRangeBarChangeListener {
         }
 
         // Check Humidity Rangebar Input
+        boolean checkHumidityRangeBarInput;
         if (minHumidity == maxHumidity || minHumidity < 1 || minHumidity > 100 || maxHumidity < 1 || maxHumidity > 100) {
             checkHumidityRangeBarInput = false;
             humidityError.setVisibility(View.VISIBLE);
@@ -159,6 +172,7 @@ public class FormHandler implements RangeBar.OnRangeBarChangeListener {
         }
 
         // Check CheckBoxes Input
+        boolean checkCheckBoxesInput;
         if (snowCheckBox.isChecked() || rainCheckBox.isChecked() || clearCheckBox.isChecked() || cloudsCheckBox.isChecked() || drizzleCheckBox.isChecked()) {
             checkCheckBoxesInput = true;
             conditionsError.setVisibility(View.GONE);
@@ -169,6 +183,7 @@ public class FormHandler implements RangeBar.OnRangeBarChangeListener {
         }
 
         // Check EditText Input
+        boolean checkZipCodeInput;
         if (zipCodeEditText.getText().toString().trim().length() > 0 && zipCodeEditText.getText().toString().trim().matches("[0-9]*") && zipCodeEditText.getText().toString().trim().length() < 10) {
             checkZipCodeInput = true;
             zipCodeError.setVisibility(View.GONE);

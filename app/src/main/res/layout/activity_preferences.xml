@@ -149,20 +149,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:text="Snow" />
+                    android:text="@string/snow" />
 
                 <CheckBox
                     android:id="@+id/checkbox_rain"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:text="Rain" />
+                    android:text="@string/rain" />
 
                 <CheckBox
                     android:id="@+id/checkbox_clear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Clear" />
+                    android:text="@string/clear" />
             </LinearLayout>
 
             <LinearLayout
@@ -177,14 +177,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:text="Clouds" />
+                    android:text="@string/clouds" />
 
                 <CheckBox
                     android:id="@+id/checkbox_drizzle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:text="Drizzle" />
+                    android:text="@string/drizzle" />
             </LinearLayout>
 
             <TextView
@@ -213,10 +213,11 @@
                 android:id="@+id/zip_code_edittext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Enter Zip Code"
+                android:hint="@string/enter_zip_code"
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
-                android:autofillHints="" />
+                android:autofillHints=""
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/preferred_zipcode_error_textview"
@@ -225,7 +226,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:text="Length must be between 1-9 | Empty input"
+                android:text="@string/zipcode_error_text"
                 android:textColor="#F60B0B"
                 android:textSize="14sp"
                 android:visibility="gone"/>

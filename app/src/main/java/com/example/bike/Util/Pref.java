@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 
 public class Pref {
-    private SharedPreferences sharedPreferences;
+    private final SharedPreferences sharedPreferences;
 
     public Pref(Activity activity) {
         this.sharedPreferences = activity.getSharedPreferences("Specifications", Activity.MODE_PRIVATE);
