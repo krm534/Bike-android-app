@@ -14,7 +14,7 @@ import com.example.bike.Interface.NetworkErrorResponse;
 import com.example.bike.Model.Comparison;
 import com.example.bike.Model.Weather;
 import com.example.bike.WeatherRepository;
-import com.example.bike.Interface.WeatherRepositoryAsyncResponse;
+import com.example.bike.Interface.ValidAsyncResponse;
 import com.example.bike.R;
 import com.example.bike.Util.Pref;
 
@@ -175,7 +175,7 @@ public class WeatherHandler {
     // Handle receiving data from API
     public void getData() {
         // Get weather data from weather API
-        weatherRepository.getWeather(new WeatherRepositoryAsyncResponse() {
+        weatherRepository.getWeather(new ValidAsyncResponse() {
             @Override
             public void processFinished(ArrayList<Weather> weatherArrayList) {
                 handleAsyncData(weatherArrayList);

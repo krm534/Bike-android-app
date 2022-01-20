@@ -8,7 +8,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.bike.Interface.InvalidArrayResponse;
 import com.example.bike.Interface.NetworkErrorResponse;
-import com.example.bike.Interface.WeatherRepositoryAsyncResponse;
+import com.example.bike.Interface.ValidAsyncResponse;
 import com.example.bike.Model.Weather;
 import com.example.bike.Util.Pref;
 
@@ -33,7 +33,7 @@ public class WeatherRepository {
     }
 
     // Get weather if connected to internet
-    public void getWeather(final WeatherRepositoryAsyncResponse validCallback,
+    public void getWeather(final ValidAsyncResponse validCallback,
                            final InvalidArrayResponse invalidArrayCallback,
                            final NetworkErrorResponse networkErrorCallback) {
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, fullUrl, null, new Response.Listener<JSONObject>() {

@@ -4,6 +4,6 @@ import com.example.bike.Model.Weather;
 
 import java.util.ArrayList;
 
-public interface WeatherRepositoryAsyncResponse {
+public interface ValidAsyncResponse {
     void processFinished(ArrayList<Weather> weatherArrayList);
 }
