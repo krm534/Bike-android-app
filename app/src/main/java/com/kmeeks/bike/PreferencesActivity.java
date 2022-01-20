@@ -1,4 +1,4 @@
-package com.example.bike;
+package com.kmeeks.bike;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.bike.Handler.FormHandler;
-import com.example.bike.Util.Pref;
+import com.kmeeks.bike.Handler.FormHandler;
+import com.kmeeks.bike.Util.Pref;
 
 public class PreferencesActivity extends AppCompatActivity {
     private FormHandler formHandler;

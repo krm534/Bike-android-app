@@ -1,6 +1,6 @@
-package com.example.bike.Interface;
+package com.kmeeks.bike.Interface;
 
-import com.example.bike.Model.Weather;
+import com.kmeeks.bike.Model.Weather;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.bike;
+package com.kmeeks.bike;
 
 import android.app.Activity;
 
@@ -6,11 +6,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.bike.Interface.InvalidArrayResponse;
-import com.example.bike.Interface.NetworkErrorResponse;
-import com.example.bike.Interface.ValidAsyncResponse;
-import com.example.bike.Model.Weather;
-import com.example.bike.Util.Pref;
+import com.kmeeks.bike.Interface.InvalidArrayResponse;
+import com.kmeeks.bike.Interface.NetworkErrorResponse;
+import com.kmeeks.bike.Interface.ValidAsyncResponse;
+import com.kmeeks.bike.Model.Weather;
+import com.kmeeks.bike.Util.Pref;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,8 +19,8 @@ import org.json.JSONObject;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-import static com.example.bike.Util.Constants.WEATHER_API_KEY;
-import static com.example.bike.Util.Constants.WEATHER_API_URL;
+import static com.kmeeks.bike.Util.Constants.WEATHER_API_KEY;
+import static com.kmeeks.bike.Util.Constants.WEATHER_API_URL;
 
 public class WeatherRepository {
     private final ArrayList<Weather> arrayOfWeather = new ArrayList<>();

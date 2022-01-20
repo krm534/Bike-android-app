@@ -1,4 +1,4 @@
-package com.example.bike.Util;
+package com.kmeeks.bike.Util;
 
 public class Constants {
     // Pref Keys

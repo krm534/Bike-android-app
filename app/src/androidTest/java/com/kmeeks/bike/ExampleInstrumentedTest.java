@@ -1,4 +1,4 @@
-package com.example.bike;
+package com.kmeeks.bike;
 
 import android.content.Context;
 

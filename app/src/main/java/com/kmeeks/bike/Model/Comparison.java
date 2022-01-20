@@ -1,4 +1,4 @@
-package com.example.bike.Model;
+package com.kmeeks.bike.Model;
 
 public class Comparison {
     private int counter;

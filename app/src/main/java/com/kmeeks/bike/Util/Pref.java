@@ -1,23 +1,23 @@
-package com.example.bike.Util;
+package com.kmeeks.bike.Util;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
 
-import static com.example.bike.Util.Constants.CLEAR;
-import static com.example.bike.Util.Constants.CLOUDS;
-import static com.example.bike.Util.Constants.DRIZZLE;
-import static com.example.bike.Util.Constants.MAX_HUMIDITY;
-import static com.example.bike.Util.Constants.MAX_TEMP;
-import static com.example.bike.Util.Constants.MAX_WIND_SPEED;
-import static com.example.bike.Util.Constants.MIN_HUMIDITY;
-import static com.example.bike.Util.Constants.MIN_TEMP;
-import static com.example.bike.Util.Constants.MIN_WIND_SPEED;
-import static com.example.bike.Util.Constants.RAIN;
-import static com.example.bike.Util.Constants.SNOW;
-import static com.example.bike.Util.Constants.SPEC;
-import static com.example.bike.Util.Constants.WEATHER_DATA;
-import static com.example.bike.Util.Constants.ZIP_CODE;
-import static com.example.bike.Util.Constants.ZIP_CODE_CHECKED_FLAG;
+import static com.kmeeks.bike.Util.Constants.CLEAR;
+import static com.kmeeks.bike.Util.Constants.CLOUDS;
+import static com.kmeeks.bike.Util.Constants.DRIZZLE;
+import static com.kmeeks.bike.Util.Constants.MAX_HUMIDITY;
+import static com.kmeeks.bike.Util.Constants.MAX_TEMP;
+import static com.kmeeks.bike.Util.Constants.MAX_WIND_SPEED;
+import static com.kmeeks.bike.Util.Constants.MIN_HUMIDITY;
+import static com.kmeeks.bike.Util.Constants.MIN_TEMP;
+import static com.kmeeks.bike.Util.Constants.MIN_WIND_SPEED;
+import static com.kmeeks.bike.Util.Constants.RAIN;
+import static com.kmeeks.bike.Util.Constants.SNOW;
+import static com.kmeeks.bike.Util.Constants.SPEC;
+import static com.kmeeks.bike.Util.Constants.WEATHER_DATA;
+import static com.kmeeks.bike.Util.Constants.ZIP_CODE;
+import static com.kmeeks.bike.Util.Constants.ZIP_CODE_CHECKED_FLAG;
 
 public class Pref {
     private final SharedPreferences sharedPreferences;

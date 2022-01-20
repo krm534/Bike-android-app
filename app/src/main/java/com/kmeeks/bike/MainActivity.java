@@ -1,4 +1,4 @@
-package com.example.bike;
+package com.kmeeks.bike;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,10 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.example.bike.Model.Comparison;
-import com.example.bike.Handler.NetworkHandler;
-import com.example.bike.Handler.WeatherHandler;
-import com.example.bike.Util.Pref;
+import com.kmeeks.bike.Model.Comparison;
+import com.kmeeks.bike.Handler.NetworkHandler;
+import com.kmeeks.bike.Handler.WeatherHandler;
+import com.kmeeks.bike.Util.Pref;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private WeatherHandler weatherHandler;

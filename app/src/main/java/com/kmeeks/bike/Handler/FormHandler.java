@@ -1,4 +1,4 @@
-package com.example.bike.Handler;
+package com.kmeeks.bike.Handler;
 
 import android.app.Activity;
 import android.view.View;
@@ -7,8 +7,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.appyvet.materialrangebar.RangeBar;
-import com.example.bike.R;
-import com.example.bike.Util.Pref;
+import com.kmeeks.bike.R;
+import com.kmeeks.bike.Util.Pref;
 
 import java.util.Locale;
 

@@ -1,4 +1,4 @@
-package com.example.bike.Handler;
+package com.kmeeks.bike.Handler;
 
 import android.app.Activity;
 import android.view.View;
@@ -9,14 +9,14 @@ import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.cardview.widget.CardView;
 
 import com.android.volley.NetworkResponse;
-import com.example.bike.Interface.InvalidArrayResponse;
-import com.example.bike.Interface.NetworkErrorResponse;
-import com.example.bike.Model.Comparison;
-import com.example.bike.Model.Weather;
-import com.example.bike.WeatherRepository;
-import com.example.bike.Interface.ValidAsyncResponse;
-import com.example.bike.R;
-import com.example.bike.Util.Pref;
+import com.kmeeks.bike.Interface.InvalidArrayResponse;
+import com.kmeeks.bike.Interface.NetworkErrorResponse;
+import com.kmeeks.bike.Model.Comparison;
+import com.kmeeks.bike.Model.Weather;
+import com.kmeeks.bike.WeatherRepository;
+import com.kmeeks.bike.Interface.ValidAsyncResponse;
+import com.kmeeks.bike.R;
+import com.kmeeks.bike.Util.Pref;
 
 import org.json.JSONArray;
 import org.json.JSONException;

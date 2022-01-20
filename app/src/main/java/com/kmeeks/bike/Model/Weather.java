@@ -1,4 +1,4 @@
-package com.example.bike.Model;
+package com.kmeeks.bike.Model;
 
 public class Weather {
     private float maxTemperature, minTemperature, windSpeed;
