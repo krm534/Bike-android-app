@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Bike</string>
+    <string name="app_name">Bike?</string>
     <string name="title_text">BIKE?</string>
     <string name="no_preferences_text">No preferences have been selected</string>
     <string name="title_text2">Preferences</string>

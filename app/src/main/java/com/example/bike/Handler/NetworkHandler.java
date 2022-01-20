@@ -1,4 +1,4 @@
-package com.example.bike.Model;
+package com.example.bike.Handler;
 
 import android.app.Activity;
 import android.content.Context;
@@ -23,28 +23,22 @@ public class NetworkHandler {
         this.weatherHandler = weatherHandler;
     }
 
-    // Check if user is connected to Wifi or Mobile service
-    public boolean haveNetworkConnection() {
-        boolean haveConnectedWifi = false;
-        boolean haveConnectedMobile = false;
+    // Check if user is connected to network
+    public boolean hasNetworkConnection() {
+        boolean hasConnectivity = false;
 
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         assert cm != null;
         NetworkInfo[] netInfo = cm.getAllNetworkInfo();
         for (NetworkInfo ni : netInfo) {
-            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
-                if (ni.isConnected())
-                    haveConnectedWifi = true;
-            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
-                if (ni.isConnected())
-                    haveConnectedMobile = true;
+            if ((ni.getTypeName().equalsIgnoreCase("WIFI") || ni.getTypeName().equalsIgnoreCase("MOBILE")) && ni.isConnected())
+                hasConnectivity = true;
         }
-        return haveConnectedWifi || haveConnectedMobile;
+        return hasConnectivity;
     }
 
     // Run this code if connected to network
-    public void ConnectedToNetwork() {
-        // Set TextView
+    public void isConnectedToNetwork() {
         noPreferences = ((Activity) context).findViewById(R.id.no_preferences_textview);
 
         // Check if the SharedPreferences keys are filled
@@ -53,48 +47,42 @@ public class NetworkHandler {
                 pref.getMaxWindSpeed() != 0 && pref.getMinWindSpeed() != 0 && pref.getMaxTemperature() != 0 &&
                 pref.getMinTemperature() != 0) {
             weatherHandler.getData();
-        }
-        else if (pref.getCheckedZipCode()) {
+        } else if (pref.getCheckedZipCode()) {
             noPreferences.setText(R.string.invalid_zipcode);
-        }
-        else {
+        } else {
             noPreferences.setText(R.string.no_preferences_selected);
         }
     }
 
     // Run this code if not connected to network
-    public void NotConnectedToNetwork() {
-        // Set TextView
+    public void notConnectedToNetwork() {
         ImageButton settings = ((Activity) context).findViewById(R.id.settings_imagebutton);
 
         // Check if weather data is stored in preference
         if (!(pref.getWeatherData().isEmpty())) {
-            PrefIsNotEmpty();
-        }
-        else {
-            PrefIsEmpty();
+            prefIsNotEmpty();
+        } else {
+            prefIsEmpty();
             settings.setVisibility(View.GONE);
         }
     }
 
     // Run this code if not connected to network and no preferences are stored
-    private void PrefIsEmpty() {
+    private void prefIsEmpty() {
         if (pref.getCheckedZipCode()) {
             noPreferences.setText(R.string.invalid_zipcode_and_no_network);
-        }
-        else if (!pref.getClear() && !pref.getClouds() && !pref.getDrizzle() && !pref.getRain() && !pref.getSnow() &&
+        } else if (!pref.getClear() && !pref.getClouds() && !pref.getDrizzle() && !pref.getRain() && !pref.getSnow() &&
                 pref.getZipCode() == 0 && pref.getMaxHumidity() == 0 && pref.getMinHumidity() == 0 &&
                 pref.getMaxWindSpeed() == 0 && pref.getMinWindSpeed() == 0 && pref.getMaxTemperature() == 0 &&
                 pref.getMinTemperature() == 0) {
             noPreferences.setText(R.string.no_preferences_and_no_network);
-        }
-        else {
+        } else {
             noPreferences.setText(R.string.network_error);
         }
     }
 
     // Run this code if not connected to network and preferences are stored
-    private void PrefIsNotEmpty() {
+    private void prefIsNotEmpty() {
         weatherHandler.handleUpdateUI();
     }
 }

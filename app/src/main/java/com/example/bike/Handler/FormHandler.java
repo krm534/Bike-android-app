@@ -1,4 +1,4 @@
-package com.example.bike.Model;
+package com.example.bike.Handler;
 
 import android.app.Activity;
 import android.view.View;
@@ -70,40 +70,35 @@ public class FormHandler implements RangeBar.OnRangeBarChangeListener {
         // Check clear condition
         if (pref.getClear()) {
             clearCheckBox.setChecked(true);
-        }
-        else {
+        } else {
             clearCheckBox.setChecked(false);
         }
 
         // Check clouds condition
         if (pref.getClouds()) {
             cloudsCheckBox.setChecked(true);
-        }
-        else {
+        } else {
             cloudsCheckBox.setChecked(false);
         }
 
         // Check drizzle condition
         if (pref.getDrizzle()) {
             drizzleCheckBox.setChecked(true);
-        }
-        else {
+        } else {
             drizzleCheckBox.setChecked(false);
         }
 
         // Check rain condition
         if (pref.getRain()) {
             rainCheckBox.setChecked(true);
-        }
-        else {
+        } else {
             rainCheckBox.setChecked(false);
         }
 
         // Check rain condition
         if (pref.getSnow()) {
             snowCheckBox.setChecked(true);
-        }
-        else {
+        } else {
             snowCheckBox.setChecked(false);
         }
 
@@ -143,8 +138,7 @@ public class FormHandler implements RangeBar.OnRangeBarChangeListener {
         if (minTemp == maxTemp || minTemp < 1 || minTemp > 100 || maxTemp < 1 || maxTemp > 100) {
             checkTempRangeBarInput = false;
             tempError.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             checkTempRangeBarInput = true;
             tempError.setVisibility(View.GONE);
         }
@@ -154,8 +148,7 @@ public class FormHandler implements RangeBar.OnRangeBarChangeListener {
         if (minWindSpeed == maxWindSpeed || minWindSpeed < 1 || minWindSpeed > 30 || maxWindSpeed < 1 || maxWindSpeed > 30) {
             checkWindSpeedRangeBarInput = false;
             windSpeedError.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             checkWindSpeedRangeBarInput = true;
             windSpeedError.setVisibility(View.GONE);
         }
@@ -165,8 +158,7 @@ public class FormHandler implements RangeBar.OnRangeBarChangeListener {
         if (minHumidity == maxHumidity || minHumidity < 1 || minHumidity > 100 || maxHumidity < 1 || maxHumidity > 100) {
             checkHumidityRangeBarInput = false;
             humidityError.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             checkHumidityRangeBarInput = true;
             humidityError.setVisibility(View.GONE);
         }
@@ -176,8 +168,7 @@ public class FormHandler implements RangeBar.OnRangeBarChangeListener {
         if (snowCheckBox.isChecked() || rainCheckBox.isChecked() || clearCheckBox.isChecked() || cloudsCheckBox.isChecked() || drizzleCheckBox.isChecked()) {
             checkCheckBoxesInput = true;
             conditionsError.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             checkCheckBoxesInput = false;
             conditionsError.setVisibility(View.VISIBLE);
         }
@@ -187,8 +178,7 @@ public class FormHandler implements RangeBar.OnRangeBarChangeListener {
         if (zipCodeEditText.getText().toString().trim().length() > 0 && zipCodeEditText.getText().toString().trim().matches("[0-9]*") && zipCodeEditText.getText().toString().trim().length() < 10) {
             checkZipCodeInput = true;
             zipCodeError.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             checkZipCodeInput = false;
             zipCodeError.setVisibility(View.VISIBLE);
         }
@@ -197,9 +187,6 @@ public class FormHandler implements RangeBar.OnRangeBarChangeListener {
         if (checkTempRangeBarInput && checkWindSpeedRangeBarInput && checkHumidityRangeBarInput && checkCheckBoxesInput && checkZipCodeInput) {
             setupPreferences();
             returnToMainActivity();
-        }
-        else {
-            System.out.println("ERROR!!!");
         }
     }
 
@@ -210,9 +197,7 @@ public class FormHandler implements RangeBar.OnRangeBarChangeListener {
     }
 
     @Override
-    public void onRangeChangeListener(RangeBar rangeBar, int leftPinIndex, int rightPinIndex, String leftPinValue, String rightPinValue) {
-
-    }
+    public void onRangeChangeListener(RangeBar rangeBar, int leftPinIndex, int rightPinIndex, String leftPinValue, String rightPinValue) {}
 
     // Change min and max integer values when the RangeBar pins are moved
     @Override
@@ -233,7 +218,5 @@ public class FormHandler implements RangeBar.OnRangeBarChangeListener {
     }
 
     @Override
-    public void onTouchStarted(RangeBar rangeBar) {
-
-    }
+    public void onTouchStarted(RangeBar rangeBar) {}
 }

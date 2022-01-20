@@ -1,4 +1,4 @@
-package com.example.bike.Controller;
+package com.example.bike;
 
 import android.app.Application;
 

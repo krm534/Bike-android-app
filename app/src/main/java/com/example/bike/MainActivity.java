@@ -8,10 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.example.bike.Data.WeatherRepository;
 import com.example.bike.Model.Comparison;
-import com.example.bike.Model.NetworkHandler;
-import com.example.bike.Model.WeatherHandler;
+import com.example.bike.Handler.NetworkHandler;
+import com.example.bike.Handler.WeatherHandler;
 import com.example.bike.Util.Pref;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -41,22 +40,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         previousButton.setOnClickListener(this);
 
         // Check network status
-        if (networkHandler.haveNetworkConnection()) {
-            System.out.println("CONNECTED!");
-            networkHandler.ConnectedToNetwork();
-        }
-        else {
-            System.out.println("DISCONNECTED!");
-            networkHandler.NotConnectedToNetwork();
+        if (networkHandler.hasNetworkConnection()) {
+            networkHandler.isConnectedToNetwork();
+        } else {
+            networkHandler.notConnectedToNetwork();
         }
     }
 
-    // Monitor button clicks
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.settings_imagebutton:
-                redirectToNewActivity();
+                redirectToPreferences();
                 break;
             case R.id.prevButton:
                 weatherHandler.reduceIndex();
@@ -69,13 +64,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    // Redirect to PreferencesActivity class
-    private void redirectToNewActivity() {
+    private void redirectToPreferences() {
         Intent intent = new Intent(MainActivity.this, PreferencesActivity.class);
         startActivityForResult(intent, LAUNCH_FIRST_ACTIVITY);
     }
 
-    // Recreate MainActivity class when control is returned from PreferenceActivity class
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

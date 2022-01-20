@@ -1,4 +1,4 @@
-package com.example.bike.Model;
+package com.example.bike.Handler;
 
 import android.app.Activity;
 import android.view.View;
@@ -9,10 +9,12 @@ import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.cardview.widget.CardView;
 
 import com.android.volley.NetworkResponse;
-import com.example.bike.Data.InvalidArrayResponse;
-import com.example.bike.Data.NetworkErrorResponse;
-import com.example.bike.Data.WeatherRepository;
-import com.example.bike.Data.WeatherRepositoryAsyncResponse;
+import com.example.bike.Interface.InvalidArrayResponse;
+import com.example.bike.Interface.NetworkErrorResponse;
+import com.example.bike.Model.Comparison;
+import com.example.bike.Model.Weather;
+import com.example.bike.WeatherRepository;
+import com.example.bike.Interface.WeatherRepositoryAsyncResponse;
 import com.example.bike.R;
 import com.example.bike.Util.Pref;
 
@@ -55,9 +57,8 @@ public class WeatherHandler {
         if (weatherList == null) {
             try {
                 JSONArray jsonArray = new JSONArray(pref.getWeatherData());
-                weatherList = weatherRepository.GetWeather(jsonArray);
-            }
-            catch (JSONException e) {
+                weatherList = weatherRepository.getWeather(jsonArray);
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
@@ -100,7 +101,7 @@ public class WeatherHandler {
     }
 
     // Compare type of weather (Extension of compareData())
-    private void compareTypeOfWeather(String type) {
+    private void compareWeatherTypes(String type) {
         switch (type) {
             case "Rain":
                 comparison.compareTypeOfWeather(pref.getRain());
@@ -124,7 +125,7 @@ public class WeatherHandler {
         comparison.compareTemperature(weather.getMaxTemperature(), weather.getMinTemperature(), pref.getMaxTemperature(), pref.getMinTemperature());
         comparison.compareHumidity(weather.getHumidity(),pref.getMinHumidity(), pref.getMaxHumidity());
         comparison.compareWindSpeed(weather.getWindSpeed(), pref.getMinWindSpeed(), pref.getMaxWindSpeed());
-        compareTypeOfWeather(weather.getTypeOfWeather());
+        compareWeatherTypes(weather.getTypeOfWeather());
 
         // Call method to display the score to user
         int score = comparison.getScore();
@@ -140,22 +141,17 @@ public class WeatherHandler {
             scoreMessage.setText(String.format("Bad day to bike in %s", location));
             displayImage.setImageResource(R.drawable.bad);
 
-        }
-        else if (score == 2) {
+        } else if (score == 2) {
             scoreMessage.setText(String.format("Mediocre day to bike in %s", location));
             displayImage.setImageResource(R.drawable.mediocre);
-        }
-        else if (score == 3) {
+        } else if (score == 3) {
             scoreMessage.setText(String.format("Good day to bike in %s", location));
             displayImage.setImageResource(R.drawable.good);
-        }
-        else {
+        } else {
             scoreMessage.setText(String.format("Great day to bike in %s", location));
             displayImage.setImageResource(R.drawable.great);
         }
     }
-
-    // -------------------------------------------------------------------------------------------------
 
     // Convert Unix weather date to recognizable UTC date
     private void getDate() {
@@ -175,8 +171,6 @@ public class WeatherHandler {
     private void setDate(String receivedDate) {
         date.setText(receivedDate);
     }
-
-    // --------------------------------------------------------------------------------------------------
 
     // Handle receiving data from API
     public void getData() {
@@ -231,8 +225,6 @@ public class WeatherHandler {
     private void handleInvalidNetworkResponse(NetworkResponse networkResponse) {
         noPreferences.setText(String.format("Network Error: %s", networkResponse));
     }
-
-    // --------------------------------------------------------------------------------------------------
 
     public void reduceIndex() {
         index--;

@@ -5,11 +5,6 @@ public class Weather {
     private int humidity, date;
     private String typeOfWeather, location;
 
-
-    public Weather() {
-
-    }
-
     public void setLocation(String city) {
         this.location = city;
     }
@@ -34,8 +29,7 @@ public class Weather {
         // Convert to Fahrenheit from Kelvin
         if (!isRepeat) {
             this.maxTemperature = (maxTemperature - 273.15f) * 1.8f + 32;
-        }
-        else {
+        } else {
             this.maxTemperature = maxTemperature;
         }
     }
@@ -48,8 +42,7 @@ public class Weather {
         // Convert to Fahrenheit from Kelvin
         if (!isRepeat) {
             this.minTemperature = (minTemperature - 273.15f) * 1.8f + 32;
-        }
-        else {
+        } else {
             this.minTemperature = minTemperature;
         }
     }
@@ -62,8 +55,7 @@ public class Weather {
         if (!isRepeat) {
             // Convert from m/s to miles/hour
             this.windSpeed = windSpeed * 2.237f;
-        }
-        else {
+        } else {
             this.windSpeed = windSpeed;
         }
     }

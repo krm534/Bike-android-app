@@ -3,10 +3,6 @@ package com.example.bike.Model;
 public class Comparison {
     private int counter;
 
-    public Comparison() {
-
-    }
-
     // Compare preferred and actual temperature values
     public void compareTemperature(float maxTemp, float minTemp, int preferredMaxTemp, int preferredMinTemp) {
         float averageTemp = (maxTemp + minTemp) / 2;
@@ -43,14 +39,11 @@ public class Comparison {
 
         if (score <= 0.25) {
             return 1;
-        }
-        else if (score == 0.50) {
+        } else if (score == 0.50) {
             return 2;
-        }
-        else if (score == 0.75) {
+        } else if (score == 0.75) {
             return 3;
-        }
-        else {
+        } else {
             return 4;
         }
     }

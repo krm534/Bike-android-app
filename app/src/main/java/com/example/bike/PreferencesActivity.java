@@ -6,10 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.bike.Model.FormHandler;
+import com.example.bike.Handler.FormHandler;
 import com.example.bike.Util.Pref;
 
-public class PreferencesActivity extends AppCompatActivity{
+public class PreferencesActivity extends AppCompatActivity {
     private FormHandler formHandler;
 
     @Override

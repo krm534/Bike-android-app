@@ -1,4 +1,4 @@
-package com.example.bike.Data;
+package com.example.bike.Interface;
 
 public interface InvalidArrayResponse {
     void processFinished();
