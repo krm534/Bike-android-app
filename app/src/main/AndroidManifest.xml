@@ -14,8 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="InnerclassSeparator">
-        <activity android:name="com.kmeeks.bike.PreferencesActivity" />
-        <activity android:name="com.kmeeks.bike.MainActivity">
+        <activity android:name=".PreferencesActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
