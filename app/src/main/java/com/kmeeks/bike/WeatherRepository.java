@@ -1,4 +1,4 @@
-package com.example.bike.Data;
+package com.kmeeks.bike;
 
 import android.app.Activity;
 
@@ -6,9 +6,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.bike.Controller.AppController;
-import com.example.bike.Model.Weather;
-import com.example.bike.Util.Pref;
+import com.kmeeks.bike.Interface.InvalidArrayResponse;
+import com.kmeeks.bike.Interface.NetworkErrorResponse;
+import com.kmeeks.bike.Interface.ValidAsyncResponse;
+import com.kmeeks.bike.Model.Weather;
+import com.kmeeks.bike.Util.Pref;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,21 +19,26 @@ import org.json.JSONObject;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
+import static com.kmeeks.bike.Util.Constants.WEATHER_API_KEY;
+import static com.kmeeks.bike.Util.Constants.WEATHER_API_URL;
+
 public class WeatherRepository {
-    private String url = "https://api.openweathermap.org/data/2.5/forecast/daily?";
-    private final ArrayList<Weather> arrayOfWeather = new ArrayList<>();
     private final int DAYS = 7;
+    private String mFullUrl = WEATHER_API_URL;
+    private Activity mActivity;
+    private ArrayList<Weather> mWeatherArray = new ArrayList<>();
 
     public WeatherRepository(Activity activity) {
+        mActivity = activity;
         int zipCode = new Pref(activity).getZipCode();
-        int days = 7;
-        String API_key = "";
-        url += "zip=" + zipCode + ",us&appid=" + API_key + "&cnt=" + days;
+        mFullUrl += "zip=" + zipCode + ",us&appid=" + WEATHER_API_KEY + "&cnt=" + DAYS;
     }
 
     // Get weather if connected to internet
-    public void getWeather(final WeatherRepositoryAsyncResponse callBack, final InvalidArrayResponse callback2, final NetworkErrorResponse callback3) {
-        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+    public void getWeather(final ValidAsyncResponse validCallback,
+                           final InvalidArrayResponse invalidArrayCallback,
+                           final NetworkErrorResponse networkErrorCallback) {
+        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, mFullUrl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                     for (int i = 0; i < DAYS; i++) {
@@ -44,12 +51,12 @@ public class WeatherRepository {
                             weather.setHumidity(response.getJSONArray("list").getJSONObject(i).getInt("humidity"));
                             weather.setWindSpeed((float) response.getJSONArray("list").getJSONObject(i).getDouble("speed"), false);
                             weather.setTypeOfWeather(response.getJSONArray("list").getJSONObject(i).getJSONArray("weather").getJSONObject(0).getString("main"));
-                            arrayOfWeather.add(weather);
+                            mWeatherArray.add(weather);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
-                    callBack.processFinished(arrayOfWeather);
+                    validCallback.processFinished(mWeatherArray);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -60,30 +67,28 @@ public class WeatherRepository {
                         body = new String(error.networkResponse.data, StandardCharsets.UTF_8);
                         JSONObject jsonObject = new JSONObject(body);
                         if (jsonObject.getString("message").equals("city not found")) {
-                            callback2.processFinished();
-                        }
-                        else {
+                            invalidArrayCallback.processFinished();
+                        } else {
                             // Network Error Occurred
                             System.out.printf("ERROR: %s%n", error.networkResponse.data);
-                            callback3.processFinished(error.networkResponse);
+                            networkErrorCallback.processFinished(error.networkResponse);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
-                else {
+                } else {
                     // Network Error Occurred
-                    callback3.processFinished(error.networkResponse);
+                    networkErrorCallback.processFinished(error.networkResponse);
                 }
             }
         });
 
         // Add request to Volley queue
-        AppController.getInstance().addToRequestQueue(jsonObjectRequest);
+        Controller.getInstance().addToRequestQueue(jsonObjectRequest, mActivity.getApplicationContext());
     }
 
     // Get weather if no internet connection but weather data is stored in SharedPreferences
-    public ArrayList<Weather> GetWeather(JSONArray jsonArray)  {
+    public ArrayList<Weather> getWeather(JSONArray jsonArray)  {
         ArrayList<Weather> arrayOfWeather = new ArrayList<>();
         try {
             for (int i = 0; i < jsonArray.length() - 1; i++) {
@@ -97,11 +102,9 @@ public class WeatherRepository {
                 weather.setTypeOfWeather(jsonArray.getJSONObject(i).getString("typeOfWeather"));
                 arrayOfWeather.add(weather);
             }
-        }
-        catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
-
         return arrayOfWeather;
     }
 }

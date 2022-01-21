@@ -1,4 +1,4 @@
-package com.example.bike.Model;
+package com.kmeeks.bike.Handler;
 
 import android.app.Activity;
 import android.view.View;
@@ -9,12 +9,14 @@ import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.cardview.widget.CardView;
 
 import com.android.volley.NetworkResponse;
-import com.example.bike.Data.InvalidArrayResponse;
-import com.example.bike.Data.NetworkErrorResponse;
-import com.example.bike.Data.WeatherRepository;
-import com.example.bike.Data.WeatherRepositoryAsyncResponse;
-import com.example.bike.R;
-import com.example.bike.Util.Pref;
+import com.kmeeks.bike.Interface.InvalidArrayResponse;
+import com.kmeeks.bike.Interface.NetworkErrorResponse;
+import com.kmeeks.bike.Model.Comparison;
+import com.kmeeks.bike.Model.Weather;
+import com.kmeeks.bike.WeatherRepository;
+import com.kmeeks.bike.Interface.ValidAsyncResponse;
+import com.kmeeks.bike.R;
+import com.kmeeks.bike.Util.Pref;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,46 +27,45 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class WeatherHandler {
-    private final Activity activity;
-    private final Comparison comparison;
-    private final Pref pref;
-    private final TextView date;
-    private ArrayList<Weather> weatherList;
-    private Weather weather;
-    private int unixDate;
-    private int index = 0;
-    private final WeatherRepository weatherRepository;
-    private final LinearLayoutCompat linearLayoutCompat;
-    private final CardView cardView;
-    private final TextView noPreferences;
+    private final Activity mActivity;
+    private final Comparison mComparison;
+    private final Pref mPref;
+    private final TextView mDate;
+    private ArrayList<Weather> mWeatherList;
+    private Weather mWeather;
+    private int mUnixDate;
+    private int mIndex = 0;
+    private final WeatherRepository mWeatherRepository;
+    private final LinearLayoutCompat mLinearLayoutCompat;
+    private final CardView mCardView;
+    private final TextView mNoPreferences;
 
     public WeatherHandler(Activity activity, Comparison comparison, Pref pref, WeatherRepository weatherRepository) {
-        this.activity = activity;
-        this.comparison = comparison;
-        this.pref = pref;
-        this.date = activity.findViewById(R.id.date_textview);
-        this.noPreferences = activity.findViewById(R.id.no_preferences_textview);
-        this.cardView = activity.findViewById(R.id.display_cardview);
-        this.linearLayoutCompat = activity.findViewById(R.id.linearLayoutCompat1);
-        this.weatherRepository = weatherRepository;
+        mActivity = activity;
+        mComparison = comparison;
+        mPref = pref;
+        mDate = activity.findViewById(R.id.date_textview);
+        mNoPreferences = activity.findViewById(R.id.no_preferences_textview);
+        mCardView = activity.findViewById(R.id.display_cardview);
+        mLinearLayoutCompat = activity.findViewById(R.id.linearLayoutCompat1);
+        mWeatherRepository = weatherRepository;
     }
 
     // Update UI with data from API
     public void handleUpdateUI() {
         // Check if data is stored in weather array
-        if (weatherList == null) {
+        if (mWeatherList == null) {
             try {
-                JSONArray jsonArray = new JSONArray(pref.getWeatherData());
-                weatherList = weatherRepository.GetWeather(jsonArray);
-            }
-            catch (JSONException e) {
+                JSONArray jsonArray = new JSONArray(mPref.getWeatherData());
+                mWeatherList = mWeatherRepository.getWeather(jsonArray);
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
 
         // Set current weather object
-        weather = weatherList.get(index);
-        unixDate = weatherList.get(index).getDate();
+        mWeather = mWeatherList.get(mIndex);
+        mUnixDate = mWeatherList.get(mIndex).getDate();
 
         // Compare preferred and actual weather data
         compareData();
@@ -73,11 +74,11 @@ public class WeatherHandler {
         getDate();
 
         // Change UI elements
-        noPreferences.setText(R.string.no_preferences_selected);
-        noPreferences.setVisibility(View.GONE);
-        cardView.setVisibility(View.VISIBLE);
-        linearLayoutCompat.setVisibility(View.VISIBLE);
-        date.setVisibility(View.VISIBLE);
+        mNoPreferences.setText(R.string.no_preferences_selected);
+        mNoPreferences.setVisibility(View.GONE);
+        mCardView.setVisibility(View.VISIBLE);
+        mLinearLayoutCompat.setVisibility(View.VISIBLE);
+        mDate.setVisibility(View.VISIBLE);
     }
 
     // Save weather data as string format in SharedPreferences
@@ -96,71 +97,66 @@ public class WeatherHandler {
         }
 
         weatherDataInStringFormat += "]";
-        pref.saveWeatherData(weatherDataInStringFormat);
+        mPref.saveWeatherData(weatherDataInStringFormat);
     }
 
     // Compare type of weather (Extension of compareData())
-    private void compareTypeOfWeather(String type) {
+    private void compareWeatherTypes(String type) {
         switch (type) {
             case "Rain":
-                comparison.compareTypeOfWeather(pref.getRain());
+                mComparison.compareTypeOfWeather(mPref.getRain());
                 break;
             case "Snow":
-                comparison.compareTypeOfWeather(pref.getSnow());
+                mComparison.compareTypeOfWeather(mPref.getSnow());
                 break;
             case "Clear":
-                comparison.compareTypeOfWeather(pref.getClear());
+                mComparison.compareTypeOfWeather(mPref.getClear());
                 break;
             case "Clouds":
-                comparison.compareTypeOfWeather(pref.getClouds());
+                mComparison.compareTypeOfWeather(mPref.getClouds());
                 break;
             case "Drizzle":
-                comparison.compareTypeOfWeather(pref.getDrizzle());
+                mComparison.compareTypeOfWeather(mPref.getDrizzle());
         }
     }
 
     // Compare preferred weather and actual weather
     private void compareData() {
-        comparison.compareTemperature(weather.getMaxTemperature(), weather.getMinTemperature(), pref.getMaxTemperature(), pref.getMinTemperature());
-        comparison.compareHumidity(weather.getHumidity(),pref.getMinHumidity(), pref.getMaxHumidity());
-        comparison.compareWindSpeed(weather.getWindSpeed(), pref.getMinWindSpeed(), pref.getMaxWindSpeed());
-        compareTypeOfWeather(weather.getTypeOfWeather());
+        mComparison.compareTemperature(mWeather.getMaxTemperature(), mWeather.getMinTemperature(), mPref.getMaxTemperature(), mPref.getMinTemperature());
+        mComparison.compareHumidity(mWeather.getHumidity(), mPref.getMinHumidity(), mPref.getMaxHumidity());
+        mComparison.compareWindSpeed(mWeather.getWindSpeed(), mPref.getMinWindSpeed(), mPref.getMaxWindSpeed());
+        compareWeatherTypes(mWeather.getTypeOfWeather());
 
         // Call method to display the score to user
-        int score = comparison.getScore();
-        displayUI(score, weather.getLocation());
+        int score = mComparison.getScore();
+        displayUI(score, mWeather.getLocation());
     }
 
     // Convert and display readable score to user
     private void displayUI(int score, String location) {
-        TextView scoreMessage = activity.findViewById(R.id.message_textview);
-        ImageView displayImage = activity.findViewById(R.id.display_imageview);
+        TextView scoreMessage = mActivity.findViewById(R.id.message_textview);
+        ImageView displayImage = mActivity.findViewById(R.id.display_imageview);
 
         if (score == 1) {
             scoreMessage.setText(String.format("Bad day to bike in %s", location));
             displayImage.setImageResource(R.drawable.bad);
 
-        }
-        else if (score == 2) {
+        } else if (score == 2) {
             scoreMessage.setText(String.format("Mediocre day to bike in %s", location));
             displayImage.setImageResource(R.drawable.mediocre);
-        }
-        else if (score == 3) {
+        } else if (score == 3) {
             scoreMessage.setText(String.format("Good day to bike in %s", location));
             displayImage.setImageResource(R.drawable.good);
-        }
-        else {
+        } else {
             scoreMessage.setText(String.format("Great day to bike in %s", location));
             displayImage.setImageResource(R.drawable.great);
         }
     }
 
-    // -------------------------------------------------------------------------------------------------
-
     // Convert Unix weather date to recognizable UTC date
     private void getDate() {
         // convert seconds to milliseconds
-        Date date = new java.util.Date(unixDate*1000L);
+        Date date = new java.util.Date(mUnixDate *1000L);
 
         // the format of your date
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy z", java.util.Locale.getDefault());
@@ -173,15 +169,13 @@ public class WeatherHandler {
 
     // Set the date in the UI
     private void setDate(String receivedDate) {
-        date.setText(receivedDate);
+        mDate.setText(receivedDate);
     }
-
-    // --------------------------------------------------------------------------------------------------
 
     // Handle receiving data from API
     public void getData() {
         // Get weather data from weather API
-        weatherRepository.getWeather(new WeatherRepositoryAsyncResponse() {
+        mWeatherRepository.getWeather(new ValidAsyncResponse() {
             @Override
             public void processFinished(ArrayList<Weather> weatherArrayList) {
                 handleAsyncData(weatherArrayList);
@@ -202,13 +196,13 @@ public class WeatherHandler {
     // Get weather data from weather API
     private void handleAsyncData(ArrayList<Weather> weatherArrayList) {
         // Initialize attributes
-        this.weatherList = weatherArrayList;
+        mWeatherList = weatherArrayList;
 
         // Set weather data in a preference
         saveWeatherData(weatherArrayList);
 
         // Set invalid zip code check to false
-        pref.saveCheckedZipCode(false);
+        mPref.saveCheckedZipCode(false);
 
         // Update UI
         handleUpdateUI();
@@ -217,31 +211,29 @@ public class WeatherHandler {
     // Handle invalid zip code entrance
     private void handleInvalidZipCode() {
         // Set Invalid Zip Code to true
-        pref.saveCheckedZipCode(true);
+        mPref.saveCheckedZipCode(true);
 
         // Change UI elements
-        cardView.setVisibility(View.GONE);
-        linearLayoutCompat.setVisibility(View.GONE);
-        date.setVisibility(View.GONE);
-        noPreferences.setText(R.string.invalid_zipcode);
-        noPreferences.setVisibility(View.VISIBLE);
+        mCardView.setVisibility(View.GONE);
+        mLinearLayoutCompat.setVisibility(View.GONE);
+        mDate.setVisibility(View.GONE);
+        mNoPreferences.setText(R.string.invalid_zipcode);
+        mNoPreferences.setVisibility(View.VISIBLE);
     }
 
     // Handle network error during API call
     private void handleInvalidNetworkResponse(NetworkResponse networkResponse) {
-        noPreferences.setText(String.format("Network Error: %s", networkResponse));
+        mNoPreferences.setText(String.format("Network Error: %s", networkResponse));
     }
 
-    // --------------------------------------------------------------------------------------------------
-
     public void reduceIndex() {
-        index--;
-        if (index < 0) {
-            index = weatherList.size() - 1;
+        mIndex--;
+        if (mIndex < 0) {
+            mIndex = mWeatherList.size() - 1;
         }
     }
 
     public void increaseIndex() {
-        index = (index + 1) % weatherList.size();
+        mIndex = (mIndex + 1) % mWeatherList.size();
     }
 }
