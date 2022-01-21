@@ -26,8 +26,10 @@ public class WeatherRepository {
     private final ArrayList<Weather> arrayOfWeather = new ArrayList<>();
     private final int DAYS = 7;
     private String fullUrl = WEATHER_API_URL;
+    private Activity activity;
 
     public WeatherRepository(Activity activity) {
+        this.activity = activity;
         int zipCode = new Pref(activity).getZipCode();
         fullUrl += "zip=" + zipCode + ",us&appid=" + WEATHER_API_KEY + "&cnt=" + DAYS;
     }
@@ -82,7 +84,7 @@ public class WeatherRepository {
         });
 
         // Add request to Volley queue
-        AppController.getInstance().addToRequestQueue(jsonObjectRequest);
+        Controller.getInstance().addToRequestQueue(jsonObjectRequest, activity.getApplicationContext());
     }
 
     // Get weather if no internet connection but weather data is stored in SharedPreferences

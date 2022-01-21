@@ -20,5 +20,5 @@ public class Constants {
 
     // Weather API
     public static final String WEATHER_API_URL = "https://api.openweathermap.org/data/2.5/forecast/daily?";
-    public static final String WEATHER_API_KEY = "854e63bcad78e2ace1027e6e6f498e0f";
+    public static final String WEATHER_API_KEY = "";
 }
