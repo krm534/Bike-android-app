@@ -50,7 +50,7 @@ public class WeatherRepository {
                             weather.setMinTemperature((float) response.getJSONArray("list").getJSONObject(i).getJSONObject("temp").getDouble("min"), false);
                             weather.setHumidity(response.getJSONArray("list").getJSONObject(i).getInt("humidity"));
                             weather.setWindSpeed((float) response.getJSONArray("list").getJSONObject(i).getDouble("speed"), false);
-                            weather.setTypeOfWeather(response.getJSONArray("list").getJSONObject(i).getJSONArray("weather").getJSONObject(0).getString("main"));
+                            weather.setWeatherType(response.getJSONArray("list").getJSONObject(i).getJSONArray("weather").getJSONObject(0).getString("main"));
                             mWeatherArray.add(weather);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -89,7 +89,7 @@ public class WeatherRepository {
 
     // Get weather if no internet connection but weather data is stored in SharedPreferences
     public ArrayList<Weather> getWeather(JSONArray jsonArray)  {
-        ArrayList<Weather> arrayOfWeather = new ArrayList<>();
+        ArrayList<Weather> weatherArray = new ArrayList<>();
         try {
             for (int i = 0; i < jsonArray.length() - 1; i++) {
                 Weather weather = new Weather();
@@ -99,12 +99,12 @@ public class WeatherRepository {
                 weather.setMinTemperature((float) jsonArray.getJSONObject(i).getDouble("minTemp"), true);
                 weather.setHumidity(jsonArray.getJSONObject(i).getInt("humidity"));
                 weather.setWindSpeed((float) jsonArray.getJSONObject(i).getDouble("windSpeed"), true);
-                weather.setTypeOfWeather(jsonArray.getJSONObject(i).getString("typeOfWeather"));
-                arrayOfWeather.add(weather);
+                weather.setWeatherType(jsonArray.getJSONObject(i).getString("weatherType"));
+                weatherArray.add(weather);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return arrayOfWeather;
+        return weatherArray;
     }
 }

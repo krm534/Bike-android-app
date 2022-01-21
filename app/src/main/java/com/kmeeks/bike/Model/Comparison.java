@@ -26,10 +26,14 @@ public class Comparison {
     }
 
     // Compare preferred and actual type of weather
-    public void compareTypeOfWeather(Boolean typeOfWeather) {
-        if (typeOfWeather) {
+    public void compareWeatherType(Boolean weatherType) {
+        if (weatherType) {
             mCounter++;
         }
+    }
+
+    public int getCurrentCounter() {
+        return mCounter;
     }
 
     // Calculate and return score

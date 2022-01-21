@@ -89,7 +89,7 @@ public class WeatherHandler {
         for (Weather w: weatherData) {
             weatherDataInStringFormat += "{\"date\": \"" + w.getDate() + "\",";
             weatherDataInStringFormat += "\"location\": \"" + w.getLocation() + "\",";
-            weatherDataInStringFormat += "\"typeOfWeather\": \"" + w.getTypeOfWeather() + "\",";
+            weatherDataInStringFormat += "\"weatherType\": \"" + w.getWeatherType() + "\",";
             weatherDataInStringFormat += "\"humidity\": \"" + w.getHumidity() + "\",";
             weatherDataInStringFormat += "\"windSpeed\": \"" + w.getWindSpeed() + "\",";
             weatherDataInStringFormat += "\"minTemp\": \"" + w.getMinTemperature() + "\",";
@@ -104,19 +104,19 @@ public class WeatherHandler {
     private void compareWeatherTypes(String type) {
         switch (type) {
             case "Rain":
-                mComparison.compareTypeOfWeather(mPref.getRain());
+                mComparison.compareWeatherType(mPref.getRain());
                 break;
             case "Snow":
-                mComparison.compareTypeOfWeather(mPref.getSnow());
+                mComparison.compareWeatherType(mPref.getSnow());
                 break;
             case "Clear":
-                mComparison.compareTypeOfWeather(mPref.getClear());
+                mComparison.compareWeatherType(mPref.getClear());
                 break;
             case "Clouds":
-                mComparison.compareTypeOfWeather(mPref.getClouds());
+                mComparison.compareWeatherType(mPref.getClouds());
                 break;
             case "Drizzle":
-                mComparison.compareTypeOfWeather(mPref.getDrizzle());
+                mComparison.compareWeatherType(mPref.getDrizzle());
         }
     }
 
@@ -125,7 +125,7 @@ public class WeatherHandler {
         mComparison.compareTemperature(mWeather.getMaxTemperature(), mWeather.getMinTemperature(), mPref.getMaxTemperature(), mPref.getMinTemperature());
         mComparison.compareHumidity(mWeather.getHumidity(), mPref.getMinHumidity(), mPref.getMaxHumidity());
         mComparison.compareWindSpeed(mWeather.getWindSpeed(), mPref.getMinWindSpeed(), mPref.getMaxWindSpeed());
-        compareWeatherTypes(mWeather.getTypeOfWeather());
+        compareWeatherTypes(mWeather.getWeatherType());
 
         // Call method to display the score to user
         int score = mComparison.getScore();
