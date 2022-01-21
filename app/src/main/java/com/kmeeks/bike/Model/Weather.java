@@ -68,11 +68,11 @@ public class Weather {
         mHumidity = humidity;
     }
 
-    public String getTypeOfWeather() {
+    public String getWeatherType() {
         return mWeatherType;
     }
 
-    public void setTypeOfWeather(String typeOfWeather) {
-        mWeatherType = typeOfWeather;
+    public void setWeatherType(String weatherType) {
+        mWeatherType = weatherType;
     }
 }
