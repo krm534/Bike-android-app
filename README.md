@@ -14,7 +14,7 @@ The only prerequisite is an [OpenWeatherMap](https://openweathermap.org) API key
 -  Click the settings button in the top right corner to set your preferred biking weather conditions and location.
 -  Once your preferences are set, you should be redirected back to home screen where some content should now be displayed.
 -  You can cycle through the upcoming 7 days to check if the weather for those days matches your preferred biking preferences.
--  That's it! It's fairly simple and easy to use but can be useful if you don't want to use weather apps which are not fully customizable.
+-  That's it! It's fairly simple and easy to use but can be useful if you don't want to use weather apps which are not always fully customizable.
 
 ## Snapshots
 ![home](https://user-images.githubusercontent.com/25673410/150455361-8b492d39-b1e6-488d-8fc4-8ffc933fdbbf.png)
