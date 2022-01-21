@@ -23,22 +23,22 @@ import static com.kmeeks.bike.Util.Constants.WEATHER_API_KEY;
 import static com.kmeeks.bike.Util.Constants.WEATHER_API_URL;
 
 public class WeatherRepository {
-    private final ArrayList<Weather> arrayOfWeather = new ArrayList<>();
     private final int DAYS = 7;
-    private String fullUrl = WEATHER_API_URL;
-    private Activity activity;
+    private String mFullUrl = WEATHER_API_URL;
+    private Activity mActivity;
+    private ArrayList<Weather> mWeatherArray = new ArrayList<>();
 
     public WeatherRepository(Activity activity) {
-        this.activity = activity;
+        mActivity = activity;
         int zipCode = new Pref(activity).getZipCode();
-        fullUrl += "zip=" + zipCode + ",us&appid=" + WEATHER_API_KEY + "&cnt=" + DAYS;
+        mFullUrl += "zip=" + zipCode + ",us&appid=" + WEATHER_API_KEY + "&cnt=" + DAYS;
     }
 
     // Get weather if connected to internet
     public void getWeather(final ValidAsyncResponse validCallback,
                            final InvalidArrayResponse invalidArrayCallback,
                            final NetworkErrorResponse networkErrorCallback) {
-        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, fullUrl, null, new Response.Listener<JSONObject>() {
+        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, mFullUrl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                     for (int i = 0; i < DAYS; i++) {
@@ -51,12 +51,12 @@ public class WeatherRepository {
                             weather.setHumidity(response.getJSONArray("list").getJSONObject(i).getInt("humidity"));
                             weather.setWindSpeed((float) response.getJSONArray("list").getJSONObject(i).getDouble("speed"), false);
                             weather.setTypeOfWeather(response.getJSONArray("list").getJSONObject(i).getJSONArray("weather").getJSONObject(0).getString("main"));
-                            arrayOfWeather.add(weather);
+                            mWeatherArray.add(weather);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
-                    validCallback.processFinished(arrayOfWeather);
+                    validCallback.processFinished(mWeatherArray);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -84,7 +84,7 @@ public class WeatherRepository {
         });
 
         // Add request to Volley queue
-        Controller.getInstance().addToRequestQueue(jsonObjectRequest, activity.getApplicationContext());
+        Controller.getInstance().addToRequestQueue(jsonObjectRequest, mActivity.getApplicationContext());
     }
 
     // Get weather if no internet connection but weather data is stored in SharedPreferences

@@ -7,23 +7,23 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
 public class Controller {
-    private static Controller instance;
-    private RequestQueue requestQueue;
+    private static Controller mInstance;
+    private RequestQueue mRequestQueue;
 
     public static synchronized Controller getInstance() {
-        if (instance == null) {
-            instance = new Controller();
+        if (mInstance == null) {
+            mInstance = new Controller();
         }
-        return instance;
+        return mInstance;
     }
 
     private RequestQueue getRequestQueue(Context context) {
-        if (requestQueue == null) {
+        if (mRequestQueue == null) {
             // getApplicationContext() is key, it keeps you from leaking the
             // Activity or BroadcastReceiver if someone passes one in.
-            requestQueue = Volley.newRequestQueue(context);
+            mRequestQueue = Volley.newRequestQueue(context);
         }
-        return requestQueue;
+        return mRequestQueue;
     }
 
     public <T> void addToRequestQueue(Request<T> req, Context context) {

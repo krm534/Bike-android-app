@@ -13,174 +13,174 @@ import com.kmeeks.bike.Util.Pref;
 import java.util.Locale;
 
 public class FormHandler implements RangeBar.OnRangeBarChangeListener {
-    private final RangeBar humidityRangebar;
-    private final RangeBar temperatureRangebar;
-    private final RangeBar windSpeedRangebar;
-    private final TextView tempError;
-    private final TextView windSpeedError;
-    private final TextView humidityError;
-    private final TextView conditionsError;
-    private final TextView zipCodeError;
-    private final CheckBox snowCheckBox;
-    private final CheckBox rainCheckBox;
-    private final CheckBox clearCheckBox;
-    private final CheckBox cloudsCheckBox;
-    private final CheckBox drizzleCheckBox;
-    private int maxTemp, minTemp, maxHumidity, minHumidity, maxWindSpeed, minWindSpeed;
-    private final Pref pref;
-    private final Activity activity;
-    private final EditText zipCodeEditText;
+    private final RangeBar mHumidityRangebar;
+    private final RangeBar mTemperatureRangebar;
+    private final RangeBar mWindSpeedRangebar;
+    private final TextView mTempError;
+    private final TextView mWindSpeedError;
+    private final TextView mHumidityError;
+    private final TextView mConditionsError;
+    private final TextView mZipCodeError;
+    private final CheckBox mSnowCheckBox;
+    private final CheckBox mRainCheckBox;
+    private final CheckBox mClearCheckBox;
+    private final CheckBox mCloudsCheckBox;
+    private final CheckBox mDrizzleCheckBox;
+    private int mMaxTemp, mMinTemp, mMaxHumidity, mMinHumidity, mMaxWindSpeed, mMinWindSpeed;
+    private final Pref mPref;
+    private final Activity mActivity;
+    private final EditText mZipCodeEditText;
 
     public FormHandler(Pref pref, Activity activity) {
-        this.pref = pref;
-        this.activity = activity;
+        mPref = pref;
+        mActivity = activity;
 
-        temperatureRangebar = activity.findViewById(R.id.SearchrangeSeekbarTemperature);
-        windSpeedRangebar = activity.findViewById(R.id.SearchrangeSeekbarWindSpeed);
-        humidityRangebar = activity.findViewById(R.id.SearchrangeSeekbarHumidity);
+        mTemperatureRangebar = activity.findViewById(R.id.SearchrangeSeekbarTemperature);
+        mWindSpeedRangebar = activity.findViewById(R.id.SearchrangeSeekbarWindSpeed);
+        mHumidityRangebar = activity.findViewById(R.id.SearchrangeSeekbarHumidity);
 
-        temperatureRangebar.setOnRangeBarChangeListener(this);
-        windSpeedRangebar.setOnRangeBarChangeListener(this);
-        humidityRangebar.setOnRangeBarChangeListener(this);
+        mTemperatureRangebar.setOnRangeBarChangeListener(this);
+        mWindSpeedRangebar.setOnRangeBarChangeListener(this);
+        mHumidityRangebar.setOnRangeBarChangeListener(this);
 
-        tempError = activity.findViewById(R.id.preferred_temperature_error_textview);
-        windSpeedError = activity.findViewById(R.id.preferred_wind_speed_error_textview);
-        humidityError = activity.findViewById(R.id.preferred_humidity_error_textview);
-        conditionsError = activity.findViewById(R.id.preferred_conditions_error_textview);
-        zipCodeError = activity.findViewById(R.id.preferred_zipcode_error_textview);
+        mTempError = activity.findViewById(R.id.preferred_temperature_error_textview);
+        mWindSpeedError = activity.findViewById(R.id.preferred_wind_speed_error_textview);
+        mHumidityError = activity.findViewById(R.id.preferred_humidity_error_textview);
+        mConditionsError = activity.findViewById(R.id.preferred_conditions_error_textview);
+        mZipCodeError = activity.findViewById(R.id.preferred_zipcode_error_textview);
 
-        snowCheckBox = activity.findViewById(R.id.checkbox_snow);
-        rainCheckBox = activity.findViewById(R.id.checkbox_rain);
-        clearCheckBox = activity.findViewById(R.id.checkbox_clear);
-        cloudsCheckBox = activity.findViewById(R.id.checkbox_clouds);
-        drizzleCheckBox = activity.findViewById(R.id.checkbox_drizzle);
+        mSnowCheckBox = activity.findViewById(R.id.checkbox_snow);
+        mRainCheckBox = activity.findViewById(R.id.checkbox_rain);
+        mClearCheckBox = activity.findViewById(R.id.checkbox_clear);
+        mCloudsCheckBox = activity.findViewById(R.id.checkbox_clouds);
+        mDrizzleCheckBox = activity.findViewById(R.id.checkbox_drizzle);
 
-        zipCodeEditText = activity.findViewById(R.id.zip_code_edittext);
+        mZipCodeEditText = activity.findViewById(R.id.zip_code_edittext);
 
-        maxTemp = Integer.parseInt(temperatureRangebar.getRightPinValue());
-        minTemp = Integer.parseInt(temperatureRangebar.getLeftPinValue());
-        maxHumidity = Integer.parseInt(humidityRangebar.getRightPinValue());
-        minHumidity = Integer.parseInt(humidityRangebar.getLeftPinValue());
-        maxWindSpeed = Integer.parseInt(windSpeedRangebar.getRightPinValue());
-        minWindSpeed = Integer.parseInt(windSpeedRangebar.getLeftPinValue());
+        mMaxTemp = Integer.parseInt(mTemperatureRangebar.getRightPinValue());
+        mMinTemp = Integer.parseInt(mTemperatureRangebar.getLeftPinValue());
+        mMaxHumidity = Integer.parseInt(mHumidityRangebar.getRightPinValue());
+        mMinHumidity = Integer.parseInt(mHumidityRangebar.getLeftPinValue());
+        mMaxWindSpeed = Integer.parseInt(mWindSpeedRangebar.getRightPinValue());
+        mMinWindSpeed = Integer.parseInt(mWindSpeedRangebar.getLeftPinValue());
     }
 
     // Setup the form based on information in SharedPreferences
     public void setupForm() {
         // Check clear condition
-        if (pref.getClear()) {
-            clearCheckBox.setChecked(true);
+        if (mPref.getClear()) {
+            mClearCheckBox.setChecked(true);
         } else {
-            clearCheckBox.setChecked(false);
+            mClearCheckBox.setChecked(false);
         }
 
         // Check clouds condition
-        if (pref.getClouds()) {
-            cloudsCheckBox.setChecked(true);
+        if (mPref.getClouds()) {
+            mCloudsCheckBox.setChecked(true);
         } else {
-            cloudsCheckBox.setChecked(false);
+            mCloudsCheckBox.setChecked(false);
         }
 
         // Check drizzle condition
-        if (pref.getDrizzle()) {
-            drizzleCheckBox.setChecked(true);
+        if (mPref.getDrizzle()) {
+            mDrizzleCheckBox.setChecked(true);
         } else {
-            drizzleCheckBox.setChecked(false);
+            mDrizzleCheckBox.setChecked(false);
         }
 
         // Check rain condition
-        if (pref.getRain()) {
-            rainCheckBox.setChecked(true);
+        if (mPref.getRain()) {
+            mRainCheckBox.setChecked(true);
         } else {
-            rainCheckBox.setChecked(false);
+            mRainCheckBox.setChecked(false);
         }
 
         // Check rain condition
-        if (pref.getSnow()) {
-            snowCheckBox.setChecked(true);
+        if (mPref.getSnow()) {
+            mSnowCheckBox.setChecked(true);
         } else {
-            snowCheckBox.setChecked(false);
+            mSnowCheckBox.setChecked(false);
         }
 
         // Zip code
-        zipCodeEditText.setText(String.format(Locale.getDefault(), "%d", pref.getZipCode()));
+        mZipCodeEditText.setText(String.format(Locale.getDefault(), "%d", mPref.getZipCode()));
 
         // Max and Min temperature
-        temperatureRangebar.setRangePinsByValue(pref.getMinTemperature(), pref.getMaxTemperature());
+        mTemperatureRangebar.setRangePinsByValue(mPref.getMinTemperature(), mPref.getMaxTemperature());
 
         // Max and Min humidity
-        humidityRangebar.setRangePinsByValue(pref.getMinHumidity(), pref.getMaxHumidity());
+        mHumidityRangebar.setRangePinsByValue(mPref.getMinHumidity(), mPref.getMaxHumidity());
 
         // Max and Min wind speed
-        windSpeedRangebar.setRangePinsByValue(pref.getMinWindSpeed(), pref.getMaxWindSpeed());
+        mWindSpeedRangebar.setRangePinsByValue(mPref.getMinWindSpeed(), mPref.getMaxWindSpeed());
     }
 
     // Setup SharedPreferences
     private void setupPreferences() {
-        pref.saveMinTemperature(minTemp);
-        pref.saveMaxTemperature(maxTemp);
-        pref.saveMinHumidity(minHumidity);
-        pref.saveMaxHumidity(maxHumidity);
-        pref.saveMinWindSpeed(minWindSpeed);
-        pref.saveMaxWindSpeed(maxWindSpeed);
-        pref.saveClear(clearCheckBox.isChecked());
-        pref.saveSnow(snowCheckBox.isChecked());
-        pref.saveClouds(cloudsCheckBox.isChecked());
-        pref.saveDrizzle(drizzleCheckBox.isChecked());
-        pref.saveRain(rainCheckBox.isChecked());
-        pref.saveZipCode(Integer.parseInt(zipCodeEditText.getText().toString()));
+        mPref.saveMinTemperature(mMinTemp);
+        mPref.saveMaxTemperature(mMaxTemp);
+        mPref.saveMinHumidity(mMinHumidity);
+        mPref.saveMaxHumidity(mMaxHumidity);
+        mPref.saveMinWindSpeed(mMinWindSpeed);
+        mPref.saveMaxWindSpeed(mMaxWindSpeed);
+        mPref.saveClear(mClearCheckBox.isChecked());
+        mPref.saveSnow(mSnowCheckBox.isChecked());
+        mPref.saveClouds(mCloudsCheckBox.isChecked());
+        mPref.saveDrizzle(mDrizzleCheckBox.isChecked());
+        mPref.saveRain(mRainCheckBox.isChecked());
+        mPref.saveZipCode(Integer.parseInt(mZipCodeEditText.getText().toString()));
     }
 
     // Validate form input
     public void checkFormInput() {
         // Check Temperature Rangebar Input
         boolean checkTempRangeBarInput;
-        if (minTemp == maxTemp || minTemp < 1 || minTemp > 100 || maxTemp < 1 || maxTemp > 100) {
+        if (mMinTemp == mMaxTemp || mMinTemp < 1 || mMinTemp > 100 || mMaxTemp < 1 || mMaxTemp > 100) {
             checkTempRangeBarInput = false;
-            tempError.setVisibility(View.VISIBLE);
+            mTempError.setVisibility(View.VISIBLE);
         } else {
             checkTempRangeBarInput = true;
-            tempError.setVisibility(View.GONE);
+            mTempError.setVisibility(View.GONE);
         }
 
         // Check Wind Speed Rangebar Input
         boolean checkWindSpeedRangeBarInput;
-        if (minWindSpeed == maxWindSpeed || minWindSpeed < 1 || minWindSpeed > 30 || maxWindSpeed < 1 || maxWindSpeed > 30) {
+        if (mMinWindSpeed == mMaxWindSpeed || mMinWindSpeed < 1 || mMinWindSpeed > 30 || mMaxWindSpeed < 1 || mMaxWindSpeed > 30) {
             checkWindSpeedRangeBarInput = false;
-            windSpeedError.setVisibility(View.VISIBLE);
+            mWindSpeedError.setVisibility(View.VISIBLE);
         } else {
             checkWindSpeedRangeBarInput = true;
-            windSpeedError.setVisibility(View.GONE);
+            mWindSpeedError.setVisibility(View.GONE);
         }
 
         // Check Humidity Rangebar Input
         boolean checkHumidityRangeBarInput;
-        if (minHumidity == maxHumidity || minHumidity < 1 || minHumidity > 100 || maxHumidity < 1 || maxHumidity > 100) {
+        if (mMinHumidity == mMaxHumidity || mMinHumidity < 1 || mMinHumidity > 100 || mMaxHumidity < 1 || mMaxHumidity > 100) {
             checkHumidityRangeBarInput = false;
-            humidityError.setVisibility(View.VISIBLE);
+            mHumidityError.setVisibility(View.VISIBLE);
         } else {
             checkHumidityRangeBarInput = true;
-            humidityError.setVisibility(View.GONE);
+            mHumidityError.setVisibility(View.GONE);
         }
 
         // Check CheckBoxes Input
         boolean checkCheckBoxesInput;
-        if (snowCheckBox.isChecked() || rainCheckBox.isChecked() || clearCheckBox.isChecked() || cloudsCheckBox.isChecked() || drizzleCheckBox.isChecked()) {
+        if (mSnowCheckBox.isChecked() || mRainCheckBox.isChecked() || mClearCheckBox.isChecked() || mCloudsCheckBox.isChecked() || mDrizzleCheckBox.isChecked()) {
             checkCheckBoxesInput = true;
-            conditionsError.setVisibility(View.GONE);
+            mConditionsError.setVisibility(View.GONE);
         } else {
             checkCheckBoxesInput = false;
-            conditionsError.setVisibility(View.VISIBLE);
+            mConditionsError.setVisibility(View.VISIBLE);
         }
 
         // Check EditText Input
         boolean checkZipCodeInput;
-        if (zipCodeEditText.getText().toString().trim().length() > 0 && zipCodeEditText.getText().toString().trim().matches("[0-9]*") && zipCodeEditText.getText().toString().trim().length() < 10) {
+        if (mZipCodeEditText.getText().toString().trim().length() > 0 && mZipCodeEditText.getText().toString().trim().matches("[0-9]*") && mZipCodeEditText.getText().toString().trim().length() < 10) {
             checkZipCodeInput = true;
-            zipCodeError.setVisibility(View.GONE);
+            mZipCodeError.setVisibility(View.GONE);
         } else {
             checkZipCodeInput = false;
-            zipCodeError.setVisibility(View.VISIBLE);
+            mZipCodeError.setVisibility(View.VISIBLE);
         }
 
         // Check boolean values
@@ -192,8 +192,8 @@ public class FormHandler implements RangeBar.OnRangeBarChangeListener {
 
     // Return to MainActivity Class
     private void returnToMainActivity() {
-        activity.setResult(Activity.RESULT_OK);
-        activity.finish();
+        mActivity.setResult(Activity.RESULT_OK);
+        mActivity.finish();
     }
 
     @Override
@@ -204,16 +204,16 @@ public class FormHandler implements RangeBar.OnRangeBarChangeListener {
     public void onTouchEnded(RangeBar rangeBar) {
         switch (rangeBar.getId()) {
             case R.id.SearchrangeSeekbarHumidity:
-                maxHumidity = Integer.parseInt(rangeBar.getRightPinValue());
-                minHumidity = Integer.parseInt(rangeBar.getLeftPinValue());
+                mMaxHumidity = Integer.parseInt(rangeBar.getRightPinValue());
+                mMinHumidity = Integer.parseInt(rangeBar.getLeftPinValue());
                 break;
             case R.id.SearchrangeSeekbarTemperature:
-                maxTemp = Integer.parseInt(rangeBar.getRightPinValue());
-                minTemp = Integer.parseInt(rangeBar.getLeftPinValue());
+                mMaxTemp = Integer.parseInt(rangeBar.getRightPinValue());
+                mMinTemp = Integer.parseInt(rangeBar.getLeftPinValue());
                 break;
             case R.id.SearchrangeSeekbarWindSpeed:
-                maxWindSpeed = Integer.parseInt(rangeBar.getRightPinValue());
-                minWindSpeed = Integer.parseInt(rangeBar.getLeftPinValue());
+                mMaxWindSpeed = Integer.parseInt(rangeBar.getRightPinValue());
+                mMinWindSpeed = Integer.parseInt(rangeBar.getLeftPinValue());
         }
     }
 

@@ -10,7 +10,7 @@ import com.kmeeks.bike.Handler.FormHandler;
 import com.kmeeks.bike.Util.Pref;
 
 public class PreferencesActivity extends AppCompatActivity {
-    private FormHandler formHandler;
+    private FormHandler mFormHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class PreferencesActivity extends AppCompatActivity {
 
         // Initialize Class Objects
         Pref pref = new Pref(this);
-        formHandler = new FormHandler(pref, this);
+        mFormHandler = new FormHandler(pref, this);
 
         // Initialize Save Button
         Button saveButton = findViewById(R.id.save_button);
@@ -30,14 +30,14 @@ public class PreferencesActivity extends AppCompatActivity {
                 pref.getMaxWindSpeed() != 0 && pref.getMinWindSpeed() != 0 && pref.getMaxTemperature() != 0 &&
                 pref.getMinTemperature() != 0) {
             // Setup form based on preferences
-            formHandler.setupForm();
+            mFormHandler.setupForm();
         }
 
         // Save Button Listener
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                formHandler.checkFormInput();
+                mFormHandler.checkFormInput();
             }
         });
     }

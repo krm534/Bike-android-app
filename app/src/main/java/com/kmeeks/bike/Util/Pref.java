@@ -20,121 +20,121 @@ import static com.kmeeks.bike.Util.Constants.ZIP_CODE;
 import static com.kmeeks.bike.Util.Constants.ZIP_CODE_CHECKED_FLAG;
 
 public class Pref {
-    private final SharedPreferences sharedPreferences;
+    private final SharedPreferences mSharedPreferences;
 
     public Pref(Activity activity) {
-        this.sharedPreferences = activity.getSharedPreferences(SPEC, Activity.MODE_PRIVATE);
+        mSharedPreferences = activity.getSharedPreferences(SPEC, Activity.MODE_PRIVATE);
     }
 
     public void saveMinTemperature(int minTemperature) {
-        sharedPreferences.edit().putInt(MIN_TEMP, minTemperature).apply();
+        mSharedPreferences.edit().putInt(MIN_TEMP, minTemperature).apply();
     }
 
     public int getMinTemperature() {
-        return sharedPreferences.getInt(MIN_TEMP, 0);
+        return mSharedPreferences.getInt(MIN_TEMP, 0);
     }
 
     public void saveMaxTemperature(int maxTemperature) {
-        sharedPreferences.edit().putInt(MAX_TEMP, maxTemperature).apply();
+        mSharedPreferences.edit().putInt(MAX_TEMP, maxTemperature).apply();
     }
 
     public int getMaxTemperature() {
-        return sharedPreferences.getInt(MAX_TEMP, 0);
+        return mSharedPreferences.getInt(MAX_TEMP, 0);
     }
 
     public void saveMinWindSpeed(int minWindSpeed) {
-        sharedPreferences.edit().putInt(MIN_WIND_SPEED, minWindSpeed).apply();
+        mSharedPreferences.edit().putInt(MIN_WIND_SPEED, minWindSpeed).apply();
     }
 
     public int getMinWindSpeed() {
-        return sharedPreferences.getInt(MIN_WIND_SPEED, 0);
+        return mSharedPreferences.getInt(MIN_WIND_SPEED, 0);
     }
 
     public void saveMaxWindSpeed(int maxWindSpeed) {
-        sharedPreferences.edit().putInt(MAX_WIND_SPEED, maxWindSpeed).apply();
+        mSharedPreferences.edit().putInt(MAX_WIND_SPEED, maxWindSpeed).apply();
     }
 
     public int getMaxWindSpeed() {
-        return sharedPreferences.getInt(MAX_WIND_SPEED, 0);
+        return mSharedPreferences.getInt(MAX_WIND_SPEED, 0);
     }
 
     public void saveMinHumidity(int minHumidity) {
-        sharedPreferences.edit().putInt(MIN_HUMIDITY, minHumidity).apply();
+        mSharedPreferences.edit().putInt(MIN_HUMIDITY, minHumidity).apply();
     }
 
     public int getMinHumidity() {
-        return sharedPreferences.getInt(MIN_HUMIDITY, 0);
+        return mSharedPreferences.getInt(MIN_HUMIDITY, 0);
     }
 
     public void saveMaxHumidity(int maxHumidity) {
-        sharedPreferences.edit().putInt(MAX_HUMIDITY, maxHumidity).apply();
+        mSharedPreferences.edit().putInt(MAX_HUMIDITY, maxHumidity).apply();
     }
 
     public int getMaxHumidity() {
-        return sharedPreferences.getInt(MAX_HUMIDITY, 0);
+        return mSharedPreferences.getInt(MAX_HUMIDITY, 0);
     }
 
     public void saveSnow(boolean snow) {
-        sharedPreferences.edit().putBoolean(SNOW, snow).apply();
+        mSharedPreferences.edit().putBoolean(SNOW, snow).apply();
     }
 
     public boolean getSnow() {
-        return sharedPreferences.getBoolean(SNOW, false);
+        return mSharedPreferences.getBoolean(SNOW, false);
     }
 
     public void saveRain(boolean rain) {
-        sharedPreferences.edit().putBoolean(RAIN, rain).apply();
+        mSharedPreferences.edit().putBoolean(RAIN, rain).apply();
     }
 
     public boolean getRain() {
-        return sharedPreferences.getBoolean(RAIN, false);
+        return mSharedPreferences.getBoolean(RAIN, false);
     }
 
     public void saveClear(boolean clear) {
-        sharedPreferences.edit().putBoolean(CLEAR, clear).apply();
+        mSharedPreferences.edit().putBoolean(CLEAR, clear).apply();
     }
 
     public boolean getClear() {
-        return sharedPreferences.getBoolean(CLEAR, false);
+        return mSharedPreferences.getBoolean(CLEAR, false);
     }
 
     public void saveClouds(boolean clouds) {
-        sharedPreferences.edit().putBoolean(CLOUDS, clouds).apply();
+        mSharedPreferences.edit().putBoolean(CLOUDS, clouds).apply();
     }
 
     public boolean getClouds() {
-        return sharedPreferences.getBoolean(CLOUDS, false);
+        return mSharedPreferences.getBoolean(CLOUDS, false);
     }
 
     public void saveDrizzle(boolean drizzle) {
-        sharedPreferences.edit().putBoolean(DRIZZLE, drizzle).apply();
+        mSharedPreferences.edit().putBoolean(DRIZZLE, drizzle).apply();
     }
 
     public boolean getDrizzle() {
-        return sharedPreferences.getBoolean(DRIZZLE, false);
+        return mSharedPreferences.getBoolean(DRIZZLE, false);
     }
 
     public void saveZipCode(int zipCode) {
-        sharedPreferences.edit().putInt(ZIP_CODE, zipCode).apply();
+        mSharedPreferences.edit().putInt(ZIP_CODE, zipCode).apply();
     }
 
     public int getZipCode() {
-        return sharedPreferences.getInt(ZIP_CODE, 0);
+        return mSharedPreferences.getInt(ZIP_CODE, 0);
     }
 
     public void saveWeatherData(String weatherData) {
-        sharedPreferences.edit().putString(WEATHER_DATA, weatherData).apply();
+        mSharedPreferences.edit().putString(WEATHER_DATA, weatherData).apply();
     }
 
     public String getWeatherData() {
-        return sharedPreferences.getString(WEATHER_DATA, "");
+        return mSharedPreferences.getString(WEATHER_DATA, "");
     }
 
     public void saveCheckedZipCode(boolean check) {
-        sharedPreferences.edit().putBoolean(ZIP_CODE_CHECKED_FLAG, check).apply();
+        mSharedPreferences.edit().putBoolean(ZIP_CODE_CHECKED_FLAG, check).apply();
     }
 
     public boolean getCheckedZipCode() {
-        return sharedPreferences.getBoolean(ZIP_CODE_CHECKED_FLAG, false);
+        return mSharedPreferences.getBoolean(ZIP_CODE_CHECKED_FLAG, false);
     }
 }

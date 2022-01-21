@@ -14,7 +14,7 @@ import com.kmeeks.bike.Handler.WeatherHandler;
 import com.kmeeks.bike.Util.Pref;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    private WeatherHandler weatherHandler;
+    private WeatherHandler mWeatherHandler;
     private final int LAUNCH_FIRST_ACTIVITY = 1;
 
     @Override
@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Pref pref = new Pref(this);
         Comparison comparison = new Comparison();
         WeatherRepository weatherRepository = new WeatherRepository(this);
-        weatherHandler = new WeatherHandler(this, comparison, pref, weatherRepository);
-        NetworkHandler networkHandler = new NetworkHandler(this, pref, weatherHandler);
+        mWeatherHandler = new WeatherHandler(this, comparison, pref, weatherRepository);
+        NetworkHandler networkHandler = new NetworkHandler(this, pref, mWeatherHandler);
 
         // Find UI Views
         ImageButton settings = findViewById(R.id.settings_imagebutton);
@@ -54,12 +54,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 redirectToPreferences();
                 break;
             case R.id.prevButton:
-                weatherHandler.reduceIndex();
-                weatherHandler.handleUpdateUI();
+                mWeatherHandler.reduceIndex();
+                mWeatherHandler.handleUpdateUI();
                 break;
             case R.id.nextButton:
-                weatherHandler.increaseIndex();
-                weatherHandler.handleUpdateUI();
+                mWeatherHandler.increaseIndex();
+                mWeatherHandler.handleUpdateUI();
                 break;
         }
     }

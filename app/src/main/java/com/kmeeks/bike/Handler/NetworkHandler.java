@@ -12,22 +12,22 @@ import com.kmeeks.bike.R;
 import com.kmeeks.bike.Util.Pref;
 
 public class NetworkHandler {
-    private final Context context;
-    private final Pref pref;
-    private TextView noPreferences;
-    private final WeatherHandler weatherHandler;
+    private final Context mContext;
+    private final Pref mPref;
+    private TextView mNoPreferences;
+    private final WeatherHandler mWeatherHandler;
 
     public NetworkHandler(Context context, Pref pref, WeatherHandler weatherHandler) {
-        this.context = context;
-        this.pref = pref;
-        this.weatherHandler = weatherHandler;
+        mContext = context;
+        mPref = pref;
+        mWeatherHandler = weatherHandler;
     }
 
     // Check if user is connected to network
     public boolean hasNetworkConnection() {
         boolean hasConnectivity = false;
 
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         assert cm != null;
         NetworkInfo[] netInfo = cm.getAllNetworkInfo();
         for (NetworkInfo ni : netInfo) {
@@ -39,27 +39,27 @@ public class NetworkHandler {
 
     // Run this code if connected to network
     public void isConnectedToNetwork() {
-        noPreferences = ((Activity) context).findViewById(R.id.no_preferences_textview);
+        mNoPreferences = ((Activity) mContext).findViewById(R.id.no_preferences_textview);
 
         // Check if the SharedPreferences keys are filled
-        if ((pref.getClear() || pref.getClouds() || pref.getDrizzle() || pref.getRain() || pref.getSnow()) &&
-                pref.getZipCode() != 0 && pref.getMaxHumidity() != 0 && pref.getMinHumidity() != 0 &&
-                pref.getMaxWindSpeed() != 0 && pref.getMinWindSpeed() != 0 && pref.getMaxTemperature() != 0 &&
-                pref.getMinTemperature() != 0) {
-            weatherHandler.getData();
-        } else if (pref.getCheckedZipCode()) {
-            noPreferences.setText(R.string.invalid_zipcode);
+        if ((mPref.getClear() || mPref.getClouds() || mPref.getDrizzle() || mPref.getRain() || mPref.getSnow()) &&
+                mPref.getZipCode() != 0 && mPref.getMaxHumidity() != 0 && mPref.getMinHumidity() != 0 &&
+                mPref.getMaxWindSpeed() != 0 && mPref.getMinWindSpeed() != 0 && mPref.getMaxTemperature() != 0 &&
+                mPref.getMinTemperature() != 0) {
+            mWeatherHandler.getData();
+        } else if (mPref.getCheckedZipCode()) {
+            mNoPreferences.setText(R.string.invalid_zipcode);
         } else {
-            noPreferences.setText(R.string.no_preferences_selected);
+            mNoPreferences.setText(R.string.no_preferences_selected);
         }
     }
 
     // Run this code if not connected to network
     public void notConnectedToNetwork() {
-        ImageButton settings = ((Activity) context).findViewById(R.id.settings_imagebutton);
+        ImageButton settings = ((Activity) mContext).findViewById(R.id.settings_imagebutton);
 
         // Check if weather data is stored in preference
-        if (!(pref.getWeatherData().isEmpty())) {
+        if (!(mPref.getWeatherData().isEmpty())) {
             prefIsNotEmpty();
         } else {
             prefIsEmpty();
@@ -69,20 +69,20 @@ public class NetworkHandler {
 
     // Run this code if not connected to network and no preferences are stored
     private void prefIsEmpty() {
-        if (pref.getCheckedZipCode()) {
-            noPreferences.setText(R.string.invalid_zipcode_and_no_network);
-        } else if (!pref.getClear() && !pref.getClouds() && !pref.getDrizzle() && !pref.getRain() && !pref.getSnow() &&
-                pref.getZipCode() == 0 && pref.getMaxHumidity() == 0 && pref.getMinHumidity() == 0 &&
-                pref.getMaxWindSpeed() == 0 && pref.getMinWindSpeed() == 0 && pref.getMaxTemperature() == 0 &&
-                pref.getMinTemperature() == 0) {
-            noPreferences.setText(R.string.no_preferences_and_no_network);
+        if (mPref.getCheckedZipCode()) {
+            mNoPreferences.setText(R.string.invalid_zipcode_and_no_network);
+        } else if (!mPref.getClear() && !mPref.getClouds() && !mPref.getDrizzle() && !mPref.getRain() && !mPref.getSnow() &&
+                mPref.getZipCode() == 0 && mPref.getMaxHumidity() == 0 && mPref.getMinHumidity() == 0 &&
+                mPref.getMaxWindSpeed() == 0 && mPref.getMinWindSpeed() == 0 && mPref.getMaxTemperature() == 0 &&
+                mPref.getMinTemperature() == 0) {
+            mNoPreferences.setText(R.string.no_preferences_and_no_network);
         } else {
-            noPreferences.setText(R.string.network_error);
+            mNoPreferences.setText(R.string.network_error);
         }
     }
 
     // Run this code if not connected to network and preferences are stored
     private void prefIsNotEmpty() {
-        weatherHandler.handleUpdateUI();
+        mWeatherHandler.handleUpdateUI();
     }
 }
