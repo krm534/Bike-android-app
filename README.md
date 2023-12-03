@@ -18,6 +18,3 @@ The only prerequisite is an [OpenWeatherMap](https://openweathermap.org) API key
 
 ## Snapshots
 ![home](https://user-images.githubusercontent.com/25673410/150455361-8b492d39-b1e6-488d-8fc4-8ffc933fdbbf.png)
-
-## Bugs?
-If you use the app and encounter a bug, feel free to email me at krmeeks15@gmail.com with an in-detail description of the bug encountered.
